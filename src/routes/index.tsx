@@ -5,10 +5,10 @@ import { Lightbulb, MessageCircle, Crown, Check, ArrowRight, Zap, Users, Shield 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "The Inner Circle — Join Our Exclusive Telegram Community" },
-      { name: "description", content: "Join thousands of driven professionals in our free Telegram community. Daily insights, live Q&As, and exclusive strategies." },
-      { property: "og:title", content: "The Inner Circle — Join Our Exclusive Telegram Community" },
-      { property: "og:description", content: "Join thousands of driven professionals. Daily insights, live Q&As, and exclusive strategies — all free." },
+      { title: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
+      { name: "description", content: "Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
+      { property: "og:title", content: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
+      { property: "og:description", content: "Binlerce motive profesyonel arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
     ],
   }),
   component: Index,
@@ -35,43 +35,43 @@ function Index() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          10,000+ members already joined
+          10.000+ üye katıldı bile
         </div>
 
         <h1 className="max-w-4xl text-balance text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
-          The Insights That Give You an{" "}
-          <span className="text-primary">Unfair Advantage</span>
+          Sana Haksız Avantaj Kazandıran{" "}
+          <span className="text-primary">İçgörüler</span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-          Join thousands of driven professionals getting curated daily insights, exclusive strategies,
-          and direct access to industry leaders — all in one free Telegram group.
+          Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, özel stratejiler
+          ve sektör liderlerine doğrudan erişim — hepsi tek bir ücretsiz Telegram grubunda.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4">
           <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer">
             <Button variant="cta" size="xl" className="group text-lg">
               <Zap className="h-5 w-5 transition-transform group-hover:scale-110" />
-              Join Our Telegram Group (Free)
+              Telegram Grubumuza Katıl (Ücretsiz)
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </a>
-          <p className="text-xs text-muted-foreground">Takes 10 seconds. No spam, ever. Unsubscribe anytime.</p>
+          <p className="text-xs text-muted-foreground">10 saniye sürer. Asla spam yok. İstediğin zaman ayrılabilirsin.</p>
         </div>
 
         {/* Trust indicators */}
         <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-muted-foreground">
           <div className="flex items-center gap-2 text-sm">
             <Check className="h-4 w-4 text-primary" />
-            <span>100% Free</span>
+            <span>Tamamen Ücretsiz</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
             <Check className="h-4 w-4 text-primary" />
-            <span>No Spam</span>
+            <span>Spam Yok</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
             <Check className="h-4 w-4 text-primary" />
-            <span>Instant Access</span>
+            <span>Anında Erişim</span>
           </div>
         </div>
       </section>
@@ -81,10 +81,10 @@ function Index() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              What You Get Inside
+              İçeride Neler Var
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Everything you need to stay ahead — delivered daily
+              Önde olman için ihtiyacın olan her şey — her gün kapında
             </p>
           </div>
 
@@ -95,11 +95,11 @@ function Index() {
                 <Lightbulb className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Daily Insights & Updates
+                Günlük İçgörüler ve Güncellemeler
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Start every morning with hand-picked insights, market movements, and trending strategies
-                distilled into bite-sized updates you can act on immediately.
+                Her sabah özenle seçilmiş içgörüler, piyasa hareketleri ve hemen
+                uygulayabileceğin özet stratejilerle güne başla.
               </p>
             </div>
 
@@ -109,11 +109,11 @@ function Index() {
                 <MessageCircle className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Community Discussions & Live Q&As
+                Topluluk Tartışmaları ve Canlı Soru-Cevaplar
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Engage with a curated community of like-minded professionals. Participate in live Q&A
-                sessions and get your toughest questions answered by experts.
+                Aklına gelenlerle aynı fikirde profesyonellerle etkileşime geç.
+                Canlı soru-cevap oturumlarına katıl ve uzmanlardan yanıt al.
               </p>
             </div>
 
@@ -123,11 +123,11 @@ function Index() {
                 <Crown className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Exclusive Tips & Strategies
+                Özel İpuçları ve Stratejiler
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Access frameworks, playbooks, and tactics not shared anywhere else. Our inner circle gets
-                the alpha before it becomes mainstream knowledge.
+                Başka hiçbir yerde paylaşılmayan çerçeveler, oyun kitapları ve taktiklere
+                eriş. İç çemberimiz, bilgi ana akıma ulaşmadan önce alfa bilgiyi elde eder.
               </p>
             </div>
           </div>
@@ -140,10 +140,10 @@ function Index() {
           <div className="rounded-3xl border border-border bg-surface p-8 sm:p-12 lg:p-16">
             <div className="text-center">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Why 10,000+ People Joined
+                10.000+ Kişi Neden Katıldı
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Real members, real results. Here is what makes this community different.
+                Gerçek üyeler, gerçek sonuçlar. İşte bu topluluğu farklı kılan şeyler.
               </p>
             </div>
 
@@ -153,10 +153,10 @@ function Index() {
                   <Users className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Curated Community</h4>
+                  <h4 className="font-semibold text-foreground">Özenle Seçilmiş Topluluk</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    No noise, no self-promotion. Every member is vetted. The signal-to-noise ratio
-                    is unmatched.
+                    Gürültü yok, kendi reklamı yok. Her üye inceleniyor. Sinyal-gürültü
+                    oranı eşsiz.
                   </p>
                 </div>
               </div>
@@ -166,10 +166,10 @@ function Index() {
                   <Zap className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Actionable, Not Theoretical</h4>
+                  <h4 className="font-semibold text-foreground">Uygulanabilir, Teorik Değil</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Everything shared is battle-tested. No fluff, no vague advice — just tactics
-                    you can apply today.
+                    Paylaşılan her şey savaşta test edilmiş. Boş laf yok, bulanık tavsiye yok —
+                    sadece bugün uygulayabileceğin taktikler.
                   </p>
                 </div>
               </div>
@@ -179,10 +179,10 @@ function Index() {
                   <Shield className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Zero Spam Guarantee</h4>
+                  <h4 className="font-semibold text-foreground">Sıfır Spam Garantisi</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Strict moderation keeps discussions high-quality. No ads, no bots, no
-                    distractions — ever.
+                    Sıkı moderasyon tartışmaları yüksek kalitede tutar. Reklam yok, bot yok,
+                    dikkat dağıtıcı yok — asla.
                   </p>
                 </div>
               </div>
@@ -192,10 +192,10 @@ function Index() {
                   <Check className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Free Forever</h4>
+                  <h4 className="font-semibold text-foreground">Daima Ücretsiz</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    No hidden fees, no upsells. The entire experience is 100% free because we
-                    believe value should flow both ways.
+                    Gizli ücret yok, satış baskısı yok. Tüm deneyim %100 ücretsiz çünkü
+                    değerin her iki yöne de aktığına inanıyoruz.
                   </p>
                 </div>
               </div>
@@ -208,16 +208,16 @@ function Index() {
       <section className="relative px-4 py-24">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Ready to Join the Inner Circle?
+            İç Çember'e Katılmaya Hazır mısın?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Your next competitive edge is one click away. Join 10,000+ members who refuse to settle.
+            Bir sonraki rekabet avantajın sadece bir tık uzağında. 10.000+ üyeye katıl.
           </p>
           <div className="mt-10">
             <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer">
               <Button variant="cta" size="xl" className="group text-lg">
                 <Zap className="h-5 w-5 transition-transform group-hover:scale-110" />
-                Join Our Telegram Group (Free)
+                Telegram Grubumuza Katıl (Ücretsiz)
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
@@ -225,15 +225,15 @@ function Index() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-primary" />
-              Free Forever
+              Daima Ücretsiz
             </span>
             <span className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-primary" />
-              No Credit Card
+              Kredi Kartı Yok
             </span>
             <span className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-primary" />
-              Leave Anytime
+              İstediğin Zaman Ayrıl
             </span>
           </div>
         </div>
@@ -241,7 +241,7 @@ function Index() {
 
       {/* Footer */}
       <footer className="border-t border-border px-4 py-8 text-center text-sm text-muted-foreground">
-        <p> The Inner Circle. All rights reserved.</p>
+        <p> İç Çember. Tüm hakları saklıdır.</p>
       </footer>
 
       {/* Mobile Sticky CTA */}
@@ -249,7 +249,7 @@ function Index() {
         <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="block w-full">
           <Button variant="cta" size="lg" className="w-full text-base">
             <Zap className="h-4 w-4" />
-            Join Telegram (Free)
+            Telegram'a Katıl (Ücretsiz)
           </Button>
         </a>
       </div>
