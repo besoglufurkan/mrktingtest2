@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The Inner Circle — Join Our Exclusive Telegram Community" },
-      { name: "description", content: "Join thousands of driven professionals in our free Telegram community. Daily insights, live Q&As, and exclusive strategies." },
-      { name: "author", content: "The Inner Circle" },
-      { property: "og:title", content: "The Inner Circle — Join Our Exclusive Telegram Community" },
-      { property: "og:description", content: "Join thousands of driven professionals. Daily insights, live Q&As, and exclusive strategies — all free." },
+      { title: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
+      { name: "description", content: "Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
+      { name: "author", content: "İç Çember" },
+      { property: "og:title", content: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
+      { property: "og:description", content: "Binlerce motive profesyonel arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@innercircle" },
+      { name: "twitter:site", content: "@iccember" },
     ],
     links: [
       {
