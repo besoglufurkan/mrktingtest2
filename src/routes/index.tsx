@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, BarChart3, Flame, Target, Users, Zap, CheckCircle2, ArrowRight, AlertTriangle } from "lucide-react";
+import { TrendingUp, BarChart3, Flame, Target, Users, Zap, CheckCircle2, ArrowRight, AlertTriangle, Star, Quote } from "lucide-react";
+import heroChart from "@/assets/hero-chart.jpg";
+import member1 from "@/assets/member-1.jpg";
+import member2 from "@/assets/member-2.jpg";
+import member3 from "@/assets/member-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,6 +20,27 @@ export const Route = createFileRoute("/")({
 
 const TELEGRAM_LINK = "https://t.me/+xTDQZElzQspmZDg5";
 
+const testimonials = [
+  {
+    name: "Mehmet K.",
+    role: "Bireysel Yatırımcı",
+    avatar: member1,
+    text: "3 ayda portföyüm %42 büyüdü. Sabah önerileri sayesinde artık piyasayı kovalamıyorum, piyasa beni bekliyor.",
+  },
+  {
+    name: "Elif D.",
+    role: "Aktif Trader",
+    avatar: member2,
+    text: "Hedef fiyat ve stop seviyeleri net veriliyor. Disiplinli işlem yapmayı bu grupta öğrendim. Kesinlikle tavsiye ederim.",
+  },
+  {
+    name: "Burak Y.",
+    role: "Yeni Başlayan",
+    avatar: member3,
+    text: "Borsayı yeni öğreniyordum, ekibin teknik analizleri sayesinde ilk ayımda bile kazançla çıktım. Topluluk müthiş.",
+  },
+];
+
 function Index() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-background">
@@ -30,7 +55,7 @@ function Index() {
       {/* Hero Section */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-4 pt-16 pb-20 text-center">
         {/* Scarcity badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary backdrop-blur-sm">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary backdrop-blur-sm">
           <AlertTriangle className="h-3.5 w-3.5" />
           Sınırlı Sayıda Üye Alıyoruz — Yerini Ayırt
         </div>
@@ -66,6 +91,20 @@ function Index() {
           <p className="text-xs text-muted-foreground">10 saniye sürer. Asla spam yok. İstediğin zaman ayrılabilirsin.</p>
         </div>
 
+        {/* Hero image */}
+        <div className="mt-16 w-full max-w-5xl">
+          <div className="relative rounded-2xl border border-border bg-surface p-2 shadow-2xl shadow-primary/10">
+            <div className="absolute -inset-px rounded-2xl bg-gradient-to-tr from-primary/30 via-transparent to-primary/10 opacity-50 blur-xl" />
+            <img
+              src={heroChart}
+              alt="BIST 100 canlı analiz paneli"
+              width={1280}
+              height={896}
+              className="relative w-full rounded-xl"
+            />
+          </div>
+        </div>
+
         {/* Trust indicators */}
         <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-muted-foreground">
           <div className="flex items-center gap-2 text-sm">
@@ -79,6 +118,53 @@ function Index() {
           <div className="flex items-center gap-2 text-sm">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
             <span>Teknik Analiz Ekibi</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="relative px-4 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Üyelerimiz Ne Diyor
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Gerçek yatırımcılar, gerçek sonuçlar.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="group relative flex flex-col rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-glow hover:bg-surface-elevated"
+              >
+                <Quote className="h-6 w-6 text-primary/40" />
+                <div className="mt-4 flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-emerald-500 text-emerald-500" />
+                  ))}
+                </div>
+                <p className="mt-4 flex-1 leading-relaxed text-foreground/90">
+                  "{t.text}"
+                </p>
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    width={48}
+                    height={48}
+                    loading="lazy"
+                    className="h-12 w-12 rounded-full object-cover ring-2 ring-primary/20"
+                  />
+                  <div>
+                    <div className="font-semibold text-foreground">{t.name}</div>
+                    <div className="text-xs text-muted-foreground">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -269,12 +355,6 @@ function Index() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border px-4 py-8 text-center text-sm text-muted-foreground">
-        <p> BIST 100 İç Çemberi. Tüm hakları saklıdır.</p>
-        <p className="mt-1 text-xs">Yatırım tavsiyesi değildir. Tüm paylaşımlar eğitim amaçlıdır.</p>
-      </footer>
 
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/80 p-4 backdrop-blur-lg sm:hidden">
