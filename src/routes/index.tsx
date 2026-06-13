@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Lightbulb, MessageCircle, Crown, Check, ArrowRight, Zap, Users, Shield } from "lucide-react";
+import { TrendingUp, BarChart3, Flame, Target, Users, Zap, CheckCircle2, ArrowRight, AlertTriangle } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
-      { name: "description", content: "Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
-      { property: "og:title", content: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
-      { property: "og:description", content: "Binlerce motive profesyonel arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
+      { title: "BIST 100 İç Çemberi — Günlük Hisse Önerileri & Teknik Analiz" },
+      { name: "description", content: "BIST 100'de kazananların gizli adresi. Profesyonel analiz ekibimizden günlük hisse önerileri, hedef fiyatlar ve teknik analizler — hepsi ücretsiz." },
+      { property: "og:title", content: "BIST 100 İç Çemberi — Günlük Hisse Önerileri & Teknik Analiz" },
+      { property: "og:description", content: "BIST 100'de kazananların gizli adresi. Profesyonel analiz ekibimizden günlük hisse önerileri, hedef fiyatlar ve teknik analizler — hepsi ücretsiz." },
     ],
   }),
   component: Index,
@@ -29,30 +29,37 @@ function Index() {
 
       {/* Hero Section */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-4 pt-16 pb-20 text-center">
+        {/* Scarcity badge */}
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary backdrop-blur-sm">
+          <AlertTriangle className="h-3.5 w-3.5" />
+          Sınırlı Sayıda Üye Alıyoruz — Yerini Ayırt
+        </div>
+
         {/* Small badge */}
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          10.000+ üye katıldı bile
+          12.500+ yatırımcı aramıza katıldı
         </div>
 
         <h1 className="max-w-4xl text-balance text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
-          Sana Haksız Avantaj Kazandıran{" "}
-          <span className="text-primary">İçgörüler</span>
+          BIST 100'de Kazananların{" "}
+          <span className="text-primary">Gizli Adresi</span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-          Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, özel stratejiler
-          ve sektör liderlerine doğrudan erişim — hepsi tek bir ücretsiz Telegram grubunda.
+          Profesyonel analiz ekibimiz her sabah potansiyel getirisi yüksek BIST 100 hisselerini
+          inceliyor ve doğrudan Telegram'a düşürüyor. Teknik analiz, hedef fiyat, stop seviyeleri —
+          hepsi tek bir ücretsiz grupta.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4">
           <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer">
             <Button variant="cta" size="xl" className="group text-lg">
-              <Zap className="h-5 w-5 transition-transform group-hover:scale-110" />
-              Telegram Grubumuza Katıl (Ücretsiz)
+              <TrendingUp className="h-5 w-5 transition-transform group-hover:scale-110" />
+              Gruba Ücretsiz Katıl — Hisse Önerilerini Al
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </a>
@@ -62,16 +69,16 @@ function Index() {
         {/* Trust indicators */}
         <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-muted-foreground">
           <div className="flex items-center gap-2 text-sm">
-            <Check className="h-4 w-4 text-primary" />
-            <span>Tamamen Ücretsiz</span>
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <span>%87+ Başarı Oranı</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Check className="h-4 w-4 text-primary" />
-            <span>Spam Yok</span>
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <span>Günlük BIST 100 Önerileri</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Check className="h-4 w-4 text-primary" />
-            <span>Anında Erişim</span>
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <span>Teknik Analiz Ekibi</span>
           </div>
         </div>
       </section>
@@ -84,7 +91,7 @@ function Index() {
               İçeride Neler Var
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Önde olman için ihtiyacın olan her şey — her gün kapında
+              BIST 100'de öne geçmek için ihtiyacın olan her şey — her gün kapında
             </p>
           </div>
 
@@ -92,42 +99,42 @@ function Index() {
             {/* Card 1 */}
             <div className="group relative rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-glow hover:bg-surface-elevated">
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all group-hover:ring-primary/40">
-                <Lightbulb className="h-6 w-6" />
+                <TrendingUp className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Günlük İçgörüler ve Güncellemeler
+                Günlük BIST 100 Hisse Önerileri
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Her sabah özenle seçilmiş içgörüler, piyasa hareketleri ve hemen
-                uygulayabileceğin özet stratejilerle güne başla.
+                Her gün 3-5 adet detaylı teknik ve temel analizle desteklenmiş BIST 100 hisse önerisi.
+                Hangi hisse, ne zaman, hangi fiyattan — hepsi net.
               </p>
             </div>
 
             {/* Card 2 */}
             <div className="group relative rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-glow hover:bg-surface-elevated">
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all group-hover:ring-primary/40">
-                <MessageCircle className="h-6 w-6" />
+                <BarChart3 className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Topluluk Tartışmaları ve Canlı Soru-Cevaplar
+                Teknik Analiz ve Hedef Fiyatlar
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Aklına gelenlerle aynı fikirde profesyonellerle etkileşime geç.
-                Canlı soru-cevap oturumlarına katıl ve uzmanlardan yanıt al.
+                Destek, direnç, hedef ve stop seviyeleriyle birlikte profesyonel grafik yorumlamaları.
+                Riskini kontrol altında tutarak kârını maksimize et.
               </p>
             </div>
 
             {/* Card 3 */}
             <div className="group relative rounded-2xl border border-border bg-surface p-8 transition-all duration-300 hover:border-glow hover:bg-surface-elevated">
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all group-hover:ring-primary/40">
-                <Crown className="h-6 w-6" />
+                <Flame className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-semibold text-foreground">
-                Özel İpuçları ve Stratejiler
+                Anlık Piyasa Uyarıları
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">
-                Başka hiçbir yerde paylaşılmayan çerçeveler, oyun kitapları ve taktiklere
-                eriş. İç çemberimiz, bilgi ana akıma ulaşmadan önce alfa bilgiyi elde eder.
+                BIST 100'de ani hareketler, önemli haber akışı ve anlık fırsatlar anında cebine gelsin.
+                Piyasa önünde bir adım olmanı sağlayacak erken uyarı sistemi.
               </p>
             </div>
           </div>
@@ -140,10 +147,10 @@ function Index() {
           <div className="rounded-3xl border border-border bg-surface p-8 sm:p-12 lg:p-16">
             <div className="text-center">
               <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                10.000+ Kişi Neden Katıldı
+                12.500+ Yatırımcı Neden Katıldı
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Gerçek üyeler, gerçek sonuçlar. İşte bu topluluğu farklı kılan şeyler.
+                Gerçek üyeler, gerçek kazançlar. İşte bu topluluğu farklı kılan şeyler.
               </p>
             </div>
 
@@ -153,10 +160,23 @@ function Index() {
                   <Users className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Özenle Seçilmiş Topluluk</h4>
+                  <h4 className="font-semibold text-foreground">Seçilmiş Üyelik</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Gürültü yok, kendi reklamı yok. Her üye inceleniyor. Sinyal-gürültü
-                    oranı eşsiz.
+                    Sadece ciddi yatırımcılar. Kaliteyi korumak için sınırlı sayıda yer.
+                    Gürültü yok, kendi reklamı yok.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Target className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground">%87+ Başarı Oranı</h4>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    Son 6 ayda paylaşılan hisse önerilerinin büyük çoğunluğu hedef fiyatına ulaştı.
+                    Rakamlar konuşur.
                   </p>
                 </div>
               </div>
@@ -166,39 +186,49 @@ function Index() {
                   <Zap className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Uygulanabilir, Teorik Değil</h4>
+                  <h4 className="font-semibold text-foreground">7/24 Analiz Ekibi</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Paylaşılan her şey savaşta test edilmiş. Boş laf yok, bulanık tavsiye yok —
-                    sadece bugün uygulayabileceğin taktikler.
+                    Piyasa açıkken her an aktif. Gece bile BIST 100 haberleri ve global etkiler
+                    takip ediliyor. Hiçbir fırsat kaçmaz.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Shield className="h-5 w-5" />
+                  <CheckCircle2 className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-foreground">Sıfır Spam Garantisi</h4>
+                  <h4 className="font-semibold text-foreground">Tamamen Ücretsiz</h4>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Sıkı moderasyon tartışmaları yüksek kalitede tutar. Reklam yok, bot yok,
-                    dikkat dağıtıcı yok — asla.
+                    Ücretli grupların sunduğundan daha fazlası, sıfır maliyetle.
+                    Gizli ücret yok, satış baskısı yok.
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Check className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground">Daima Ücretsiz</h4>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    Gizli ücret yok, satış baskısı yok. Tüm deneyim %100 ücretsiz çünkü
-                    değerin her iki yöne de aktığına inanıyoruz.
-                  </p>
-                </div>
-              </div>
+      {/* Performance Teaser Section */}
+      <section className="relative px-4 py-24">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-8 sm:grid-cols-3">
+            <div className="rounded-2xl border border-border bg-surface p-8 text-center">
+              <div className="text-4xl font-bold text-emerald-500">%87+</div>
+              <div className="mt-2 text-sm font-medium text-foreground">Başarı Oranı</div>
+              <div className="mt-1 text-xs text-muted-foreground">Son 6 ayda hedefe ulaşan öneriler</div>
+            </div>
+            <div className="rounded-2xl border border-border bg-surface p-8 text-center">
+              <div className="text-4xl font-bold text-primary">3-5</div>
+              <div className="mt-2 text-sm font-medium text-foreground">Günlük Hisse</div>
+              <div className="mt-1 text-xs text-muted-foreground">Her gün detaylı analizli öneriler</div>
+            </div>
+            <div className="rounded-2xl border border-border bg-surface p-8 text-center">
+              <div className="text-4xl font-bold text-primary">12.500+</div>
+              <div className="mt-2 text-sm font-medium text-foreground">Aktif Üye</div>
+              <div className="mt-1 text-xs text-muted-foreground">Her gün büyüyen yatırımcı topluluğu</div>
             </div>
           </div>
         </div>
@@ -208,32 +238,33 @@ function Index() {
       <section className="relative px-4 py-24">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            İç Çember'e Katılmaya Hazır mısın?
+            Sermayeni Büyütme Fırsatını Kaçırma
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Bir sonraki rekabet avantajın sadece bir tık uzağında. 10.000+ üyeye katıl.
+            Her gün binlerce yatırımcı BIST 100'de öne geçiyor. Profesyonel analiz desteğiyle
+            sen de aralarına katıl.
           </p>
           <div className="mt-10">
             <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer">
               <Button variant="cta" size="xl" className="group text-lg">
-                <Zap className="h-5 w-5 transition-transform group-hover:scale-110" />
-                Telegram Grubumuza Katıl (Ücretsiz)
+                <TrendingUp className="h-5 w-5 transition-transform group-hover:scale-110" />
+                Gruba Ücretsiz Katıl — Hisse Önerilerini Al
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>
           </div>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
             <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-primary" />
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
               Daima Ücretsiz
             </span>
             <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-primary" />
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
               Kredi Kartı Yok
             </span>
             <span className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-primary" />
-              İstediğin Zaman Ayrıl
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+              Anında Erişim
             </span>
           </div>
         </div>
@@ -241,15 +272,16 @@ function Index() {
 
       {/* Footer */}
       <footer className="border-t border-border px-4 py-8 text-center text-sm text-muted-foreground">
-        <p> İç Çember. Tüm hakları saklıdır.</p>
+        <p> BIST 100 İç Çemberi. Tüm hakları saklıdır.</p>
+        <p className="mt-1 text-xs">Yatırım tavsiyesi değildir. Tüm paylaşımlar eğitim amaçlıdır.</p>
       </footer>
 
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/80 p-4 backdrop-blur-lg sm:hidden">
         <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="block w-full">
           <Button variant="cta" size="lg" className="w-full text-base">
-            <Zap className="h-4 w-4" />
-            Telegram'a Katıl (Ücretsiz)
+            <TrendingUp className="h-4 w-4" />
+            Hemen Hisse Önerilerine Eriş
           </Button>
         </a>
       </div>

@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
-      { name: "description", content: "Binlerce motive profesyonelin arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
-      { name: "author", content: "İç Çember" },
-      { property: "og:title", content: "İç Çember — Özel Telegram Topluluğumuza Katıl" },
-      { property: "og:description", content: "Binlerce motive profesyonel arasına katıl. Günlük içgörüler, canlı Q&A'lar ve özel stratejiler — hepsi ücretsiz." },
+      { title: "BIST 100 İç Çemberi — Günlük Hisse Önerileri & Teknik Analiz" },
+      { name: "description", content: "BIST 100'de kazananların gizli adresi. Profesyonel analiz ekibimizden günlük hisse önerileri, hedef fiyatlar ve teknik analizler — hepsi ücretsiz." },
+      { name: "author", content: "BIST 100 İç Çemberi" },
+      { property: "og:title", content: "BIST 100 İç Çemberi — Günlük Hisse Önerileri & Teknik Analiz" },
+      { property: "og:description", content: "BIST 100'de kazananların gizli adresi. Profesyonel analiz ekibimizden günlük hisse önerileri, hedef fiyatlar ve teknik analizler — hepsi ücretsiz." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@iccember" },
+      { name: "twitter:site", content: "@bist100iccember" },
     ],
     links: [
       {
