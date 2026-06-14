@@ -32,6 +32,7 @@ import {
   Clock,
   MessageCircle,
   Mail,
+  PieChart,
 } from "lucide-react";
 import logo from "@/assets/trader-melek-logo.png";
 import member1 from "@/assets/member-1.jpg";
@@ -110,6 +111,14 @@ const features = [
     gradient: "from-rose-500 to-red-500",
     glow: "bg-rose-400/15",
   },
+  {
+    title: "Ücretsiz Portföy Analizi",
+    description:
+      "Mevcut portföyünü ekibimize ilet, hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini ücretsiz değerlendirelim. Sana özel öneriler bir arada.",
+    icon: PieChart,
+    gradient: "from-violet-500 to-indigo-500",
+    glow: "bg-violet-400/15",
+  },
 ];
 
 const testimonials = [
@@ -159,6 +168,10 @@ const faqs = [
   {
     q: "Her gün kaç hisse önerisi paylaşılıyor?",
     a: "Her sabah 3-5 adet BIST 100 hissesi paylaşılır. Her öneride giriş fiyatı, hedef fiyat ve stop seviyesi net olarak belirtilir.",
+  },
+  {
+    q: "Ücretsiz portföy analizi nasıl çalışıyor?",
+    a: "Gruba katıldıktan sonra mevcut portföyünü bizimle paylaşman yeterli. Hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini değerlendirip sana özel öneriler sunuyoruz — tamamen ücretsiz.",
   },
   {
     q: "Başarı oranı %87+ gerçek mi?",
@@ -858,7 +871,7 @@ function Index() {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5" />
-                  Kredi Kartı Yok
+                  Ücretsiz Portföy Analizi
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5" />
