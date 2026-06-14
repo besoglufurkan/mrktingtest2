@@ -5,6 +5,10 @@ import heroChart from "@/assets/hero-chart.jpg";
 import member1 from "@/assets/member-1.jpg";
 import member2 from "@/assets/member-2.jpg";
 import member3 from "@/assets/member-3.jpg";
+import member4 from "@/assets/member-4.jpg";
+import member5 from "@/assets/member-5.jpg";
+import member6 from "@/assets/member-6.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +42,24 @@ const testimonials = [
     role: "Yeni Başlayan",
     avatar: member3,
     text: "Borsayı yeni öğreniyordum, ekibin teknik analizleri sayesinde ilk ayımda bile kazançla çıktım. Topluluk müthiş.",
+  },
+  {
+    name: "Hakan S.",
+    role: "Serbest Muhasebeci",
+    avatar: member4,
+    text: "2 yıldır borsadayım ama bu kadar disiplinli ve net öneriler ilk kez görüyorum. ASELS ve THYAO önerileriyle bu ay ciddi getiri yakaladım.",
+  },
+  {
+    name: "Zeynep A.",
+    role: "Küçük Yatırımcı",
+    avatar: member5,
+    text: "Küçük sermayeyle büyümek isteyenler için biçilmiş kaftan. Her gün 3-5 hisse önerisi ve hedef fiyatlar tam benlik. Çok teşekkürler ekibe!",
+  },
+  {
+    name: "Cemil T.",
+    role: "Emekli Bankacı",
+    avatar: member6,
+    text: "40 yıllık finans tecrübem var, bu ekibin analiz kalitesi gerçekten profesyonel. Sadece öneri değil, nedenini de anlatıyorlar. Efsane.",
   },
 ];
 
