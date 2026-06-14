@@ -13,6 +13,8 @@ import {
   gainPct,
   fmtPct,
   fmtPrice,
+  type LiveStock,
+  type GainItem,
 } from "@/components/live-ticker";
 import {
   TrendingUp,
@@ -31,7 +33,6 @@ import {
   MessageCircle,
   Mail,
 } from "lucide-react";
-import heroDashboard from "@/assets/hero-dashboard.png";
 import logo from "@/assets/trader-melek-logo.png";
 import member1 from "@/assets/member-1.jpg";
 import member2 from "@/assets/member-2.jpg";
@@ -306,6 +307,139 @@ function SiteFooter() {
   );
 }
 
+const SPARK_BARS = [34, 40, 36, 48, 44, 56, 52, 64, 60, 72, 68, 82, 90];
+
+function LivePanel({
+  stocks,
+  gains,
+  marketOpen,
+  mounted,
+}: {
+  stocks: LiveStock[];
+  gains: GainItem[];
+  marketOpen: boolean;
+  mounted: boolean;
+}) {
+  const featured = stocks.find((s) => s.sym === "ASELS") ?? stocks[0];
+  const fPct = pctOf(featured);
+  const fUp = fPct >= 0;
+  const movers = [...stocks].sort((a, b) => pctOf(b) - pctOf(a)).slice(0, 5);
+  const topGain = gains[0];
+  const closed = mounted && !marketOpen;
+
+  return (
+    <div className="relative">
+      <div className="absolute -inset-px rounded-2xl bg-gradient-to-tr from-primary/30 via-transparent to-primary/10 opacity-50 blur-xl" />
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-primary/20">
+        {/* Üst bar */}
+        <div className="flex items-center justify-between border-b border-border bg-background/60 px-4 py-3">
+          <div className="flex items-center gap-2.5">
+            <div className="flex gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-rose-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
+            </div>
+            <span className="text-xs font-semibold text-foreground sm:text-sm">
+              Trader Melek · Canlı Analiz
+            </span>
+          </div>
+          <span className="flex items-center gap-1.5 text-[11px] font-semibold">
+            {closed ? (
+              <>
+                <span className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
+                <span className="text-muted-foreground">PİYASA KAPALI</span>
+              </>
+            ) : (
+              <>
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </span>
+                <span className="text-emerald-600">CANLI</span>
+              </>
+            )}
+          </span>
+        </div>
+
+        <div className="grid gap-4 p-4 sm:grid-cols-5 sm:p-6">
+          {/* Öne çıkan hisse */}
+          <div className="rounded-xl border border-border bg-gradient-to-br from-primary/10 to-emerald-500/5 p-4 text-left sm:col-span-2">
+            <div className="flex items-center justify-between">
+              <span className="text-base font-bold tracking-tight text-foreground">
+                {featured.sym}
+              </span>
+              <span
+                className={`rounded-md px-1.5 py-0.5 font-mono text-xs font-bold ${
+                  fUp ? "bg-emerald-500/15 text-emerald-600" : "bg-rose-500/15 text-rose-600"
+                }`}
+              >
+                {fUp ? "▲" : "▼"} {fmtPct(fPct)}
+              </span>
+            </div>
+            <div className="mt-2 font-mono text-2xl font-bold text-foreground sm:text-3xl">
+              ₺{fmtPrice(featured.price)}
+            </div>
+            <div className="text-[11px] text-muted-foreground">Anlık fiyat</div>
+            <div className="mt-4 flex h-12 items-end gap-1">
+              {SPARK_BARS.map((h, i) => (
+                <span
+                  key={i}
+                  style={{ height: `${h}%` }}
+                  className="flex-1 rounded-sm bg-gradient-to-t from-primary/40 to-emerald-500/80"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Öne çıkanlar listesi */}
+          <div className="sm:col-span-3">
+            <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Bugünün Öne Çıkanları
+            </div>
+            <div className="space-y-1.5">
+              {movers.map((m) => {
+                const p = pctOf(m);
+                const up = p >= 0;
+                return (
+                  <div
+                    key={m.sym}
+                    className="flex items-center justify-between rounded-lg border border-border/60 bg-background/40 px-3 py-2"
+                  >
+                    <span className="text-sm font-semibold text-foreground">{m.sym}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-sm text-muted-foreground">
+                        ₺{fmtPrice(m.price)}
+                      </span>
+                      <span
+                        className={`w-20 text-right font-mono text-sm font-bold ${
+                          up ? "text-emerald-600" : "text-rose-600"
+                        }`}
+                      >
+                        {up ? "▲" : "▼"} {fmtPct(p)}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Alt vurgu şeridi */}
+        {topGain && (
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border bg-emerald-500/5 px-4 py-3 text-sm">
+            <TrendingUp className="h-4 w-4 text-emerald-600" />
+            <span className="text-muted-foreground">Son kazanç örneği:</span>
+            <span className="font-semibold text-foreground">{topGain.sym}</span>
+            <span className="font-mono font-bold text-emerald-600">{fmtPct(gainPct(topGain))}</span>
+            <span className="text-xs text-muted-foreground">({topGain.date} → bugün)</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   const { stocks, gains, marketOpen, mounted } = useMarketData();
   const featured = stocks.find((s) => s.sym === "ASELS") ?? stocks[0];
@@ -377,38 +511,9 @@ function Index() {
             </span>
           </div>
 
-          {/* Hero dashboard */}
-          <div className="mt-12 w-full max-w-5xl sm:mt-16">
-            <div className="relative rounded-2xl border border-border bg-surface p-1.5 shadow-2xl shadow-primary/20 sm:p-2">
-              <div className="absolute -inset-px rounded-2xl bg-gradient-to-tr from-primary/30 via-transparent to-primary/10 opacity-50 blur-xl" />
-              <img
-                src={heroDashboard}
-                alt="Trader Melek BIST 100 analiz paneli"
-                width={1280}
-                height={720}
-                className="relative w-full rounded-xl"
-              />
-              <div className="absolute -left-2 -top-3 hidden rotate-[-4deg] rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:block">
-                <div className="flex items-center gap-1 text-[10px] font-medium text-muted-foreground">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  </span>
-                  CANLI · {featured.sym}
-                </div>
-                <div
-                  className={`font-mono text-sm font-bold ${featuredUp ? "text-emerald-600" : "text-rose-600"}`}
-                >
-                  {featured.sym} {fmtPct(featuredPct)}
-                </div>
-              </div>
-              <div className="absolute -bottom-3 -right-2 hidden rotate-[3deg] rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:block">
-                <div className="text-[10px] font-medium text-muted-foreground">SON FİYAT</div>
-                <div className="font-mono text-sm font-bold text-primary">
-                  ₺{fmtPrice(featured.price)}
-                </div>
-              </div>
-            </div>
+          {/* Hero canlı panel */}
+          <div className="mt-12 w-full max-w-4xl sm:mt-16">
+            <LivePanel stocks={stocks} gains={gains} marketOpen={marketOpen} mounted={mounted} />
           </div>
 
           {/* Trust indicators */}
