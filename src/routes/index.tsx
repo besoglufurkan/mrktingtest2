@@ -5,6 +5,10 @@ import heroChart from "@/assets/hero-chart.jpg";
 import member1 from "@/assets/member-1.jpg";
 import member2 from "@/assets/member-2.jpg";
 import member3 from "@/assets/member-3.jpg";
+import member4 from "@/assets/member-4.jpg";
+import member5 from "@/assets/member-5.jpg";
+import member6 from "@/assets/member-6.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +42,24 @@ const testimonials = [
     role: "Yeni Başlayan",
     avatar: member3,
     text: "Borsayı yeni öğreniyordum, ekibin teknik analizleri sayesinde ilk ayımda bile kazançla çıktım. Topluluk müthiş.",
+  },
+  {
+    name: "Hakan S.",
+    role: "Serbest Muhasebeci",
+    avatar: member4,
+    text: "2 yıldır borsadayım ama bu kadar disiplinli ve net öneriler ilk kez görüyorum. ASELS ve THYAO önerileriyle bu ay ciddi getiri yakaladım.",
+  },
+  {
+    name: "Zeynep A.",
+    role: "Küçük Yatırımcı",
+    avatar: member5,
+    text: "Küçük sermayeyle büyümek isteyenler için biçilmiş kaftan. Her gün 3-5 hisse önerisi ve hedef fiyatlar tam benlik. Çok teşekkürler ekibe!",
+  },
+  {
+    name: "Cemil T.",
+    role: "Emekli Bankacı",
+    avatar: member6,
+    text: "40 yıllık finans tecrübem var, bu ekibin analiz kalitesi gerçekten profesyonel. Sadece öneri değil, nedenini de anlatıyorlar. Efsane.",
   },
 ];
 
@@ -334,6 +356,57 @@ function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* This Month's Gains */}
+      <section className="relative px-4 py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center sm:mb-16">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Bu Ay Yaptıklarımız
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
+              Haziran ayında paylaştığımız önerilerden bazıları ve gerçekleşen sonuçlar
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+            {[
+              { sym: "ASELS", date: "3 Haziran", entry: "89.50", target: "101.20", gain: "+%13.1" },
+              { sym: "THYAO", date: "5 Haziran", entry: "275.40", target: "298.00", gain: "+%8.2" },
+              { sym: "SISE", date: "8 Haziran", entry: "42.10", target: "47.85", gain: "+%13.7" },
+              { sym: "EREGL", date: "10 Haziran", entry: "52.30", target: "58.90", gain: "+%12.6" },
+            ].map((s) => (
+              <div
+                key={s.sym}
+                className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-glow hover:shadow-xl hover:shadow-emerald-500/10"
+              >
+                <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-emerald-500/10 blur-2xl transition-all group-hover:bg-emerald-500/20" />
+                <div className="relative">
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold tracking-tight text-foreground">{s.sym}</span>
+                    <span className="text-[11px] font-medium text-muted-foreground">{s.date}</span>
+                  </div>
+                  <div className="mt-4 flex items-end justify-between">
+                    <div className="space-y-1">
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Giriş</div>
+                      <div className="font-mono text-sm font-semibold text-foreground">₺{s.entry}</div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
+                    <div className="space-y-1 text-right">
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Hedef</div>
+                      <div className="font-mono text-sm font-semibold text-emerald-600">₺{s.target}</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-emerald-500/10 py-2 text-sm font-bold text-emerald-600">
+                    <TrendingUp className="mr-1.5 h-4 w-4" />
+                    {s.gain}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
