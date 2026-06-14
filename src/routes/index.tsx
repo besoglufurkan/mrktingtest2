@@ -210,10 +210,16 @@ function TelegramButton({
 function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <a href="#" className="flex items-center gap-2.5">
-          <img src={logo} alt="Trader Melek" width={36} height={36} className="h-9 w-9" />
-          <span className="font-display text-lg font-bold tracking-tight text-foreground">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-3 sm:h-16 sm:px-4">
+        <a href="#" className="flex min-w-0 items-center gap-2 sm:gap-2.5">
+          <img
+            src={logo}
+            alt="Trader Melek"
+            width={36}
+            height={36}
+            className="h-7 w-7 mix-blend-multiply sm:h-9 sm:w-9"
+          />
+          <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">
             Trader Melek
           </span>
         </a>
@@ -249,8 +255,16 @@ function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="sm:col-span-2">
             <div className="flex items-center gap-2.5">
-              <img src={logo} alt="Trader Melek" width={32} height={32} className="h-8 w-8" />
-              <span className="font-display text-lg font-bold text-foreground">Trader Melek</span>
+              <img
+                src={logo}
+                alt="Trader Melek"
+                width={32}
+                height={32}
+                className="h-7 w-7 mix-blend-multiply sm:h-8 sm:w-8"
+              />
+              <span className="font-display text-base font-bold text-foreground sm:text-lg">
+                Trader Melek
+              </span>
             </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
               BIST 100 odaklı günlük hisse önerileri ve teknik analiz topluluğu. Her sabah

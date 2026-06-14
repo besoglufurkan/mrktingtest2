@@ -22,8 +22,14 @@ function GizlilikPage() {
       <header className="border-b border-border bg-surface">
         <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logo} alt="Trader Melek" width={32} height={32} className="h-8 w-8" />
-            <span className="font-display text-lg font-bold tracking-tight text-foreground">
+            <img
+              src={logo}
+              alt="Trader Melek"
+              width={32}
+              height={32}
+              className="h-7 w-7 mix-blend-multiply sm:h-8 sm:w-8"
+            />
+            <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">
               Trader Melek
             </span>
           </Link>
