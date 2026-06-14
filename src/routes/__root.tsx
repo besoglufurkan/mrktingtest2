@@ -85,6 +85,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@bist100iccember" },
+      { name: "twitter:title", content: "BIST 100 İç Çemberi — Günlük Hisse Önerileri & Teknik Analiz" },
+      { name: "twitter:description", content: "BIST 100'de kazananların gizli adresi. Profesyonel analiz ekibimizden günlük hisse önerileri, hedef fiyatlar ve teknik analizler — hepsi ücretsiz." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a4da2ae1-baa1-4548-9b7b-70e31c46f368/id-preview-f51df2cf--05f3c676-a6a8-4052-afd3-8cd728db9e5f.lovable.app-1781441403610.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/a4da2ae1-baa1-4548-9b7b-70e31c46f368/id-preview-f51df2cf--05f3c676-a6a8-4052-afd3-8cd728db9e5f.lovable.app-1781441403610.png" },
     ],
     links: [
       {
