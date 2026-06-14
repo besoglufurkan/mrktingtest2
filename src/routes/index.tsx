@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLiveBist, LiveTicker, pctOf, fmtPct, fmtPrice } from "@/components/live-ticker";
 import {
   TrendingUp,
   BarChart3,
@@ -306,6 +307,11 @@ function SiteFooter() {
 }
 
 function Index() {
+  const { stocks, marketOpen, mounted } = useLiveBist();
+  const featured = stocks.find((s) => s.sym === "ASELS") ?? stocks[0];
+  const featuredPct = pctOf(featured);
+  const featuredUp = featuredPct >= 0;
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
       <div className="pointer-events-none absolute inset-0 bg-mesh" />
@@ -316,33 +322,7 @@ function Index() {
       <SiteHeader />
 
       <main className="relative z-10 pb-24 sm:pb-0">
-        {/* Live ticker */}
-        <div className="overflow-hidden border-b border-border bg-foreground text-background">
-          <div className="flex animate-marquee whitespace-nowrap py-2 text-xs font-mono font-medium">
-            {Array.from({ length: 2 }).map((_, dup) => (
-              <div key={dup} className="flex shrink-0 items-center gap-8 px-4">
-                {[
-                  ["THYAO", "+%4.82"],
-                  ["ASELS", "+%3.21"],
-                  ["SISE", "+%2.95"],
-                  ["EREGL", "+%5.10"],
-                  ["TUPRS", "+%2.40"],
-                  ["KCHOL", "+%1.88"],
-                  ["BIMAS", "+%3.62"],
-                  ["GARAN", "+%4.05"],
-                  ["AKBNK", "+%2.71"],
-                  ["FROTO", "+%6.14"],
-                ].map(([sym, pct]) => (
-                  <span key={`${dup}-${sym}`} className="flex items-center gap-2">
-                    <span className="opacity-70">{sym}</span>
-                    <span className="text-emerald-400">{pct}</span>
-                    <span className="opacity-30">&bull;</span>
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
+        <LiveTicker stocks={stocks} marketOpen={marketOpen} mounted={mounted} />
 
         {/* Hero */}
         <section className="relative flex flex-col items-center justify-center px-4 pt-10 pb-16 text-center sm:pt-16 sm:pb-20">
@@ -380,6 +360,23 @@ function Index() {
             </p>
           </div>
 
+          {/* Mobil canlı fiyat rozeti */}
+          <div className="mt-7 flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs shadow-sm sm:hidden">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            </span>
+            <span className="font-medium text-muted-foreground">{featured.sym}</span>
+            <span className="font-mono font-semibold text-foreground">
+              ₺{fmtPrice(featured.price)}
+            </span>
+            <span
+              className={`font-mono font-bold ${featuredUp ? "text-emerald-600" : "text-rose-600"}`}
+            >
+              {fmtPct(featuredPct)}
+            </span>
+          </div>
+
           {/* Hero dashboard */}
           <div className="mt-12 w-full max-w-5xl sm:mt-16">
             <div className="relative rounded-2xl border border-border bg-surface p-1.5 shadow-2xl shadow-primary/20 sm:p-2">
@@ -392,12 +389,24 @@ function Index() {
                 className="relative w-full rounded-xl"
               />
               <div className="absolute -left-2 -top-3 hidden rotate-[-4deg] rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:block">
-                <div className="text-[10px] font-medium text-muted-foreground">SON ÖNERİ</div>
-                <div className="font-mono text-sm font-bold text-emerald-600">ASELS +%4.82</div>
+                <div className="flex items-center gap-1 text-[10px] font-medium text-muted-foreground">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  </span>
+                  CANLI · {featured.sym}
+                </div>
+                <div
+                  className={`font-mono text-sm font-bold ${featuredUp ? "text-emerald-600" : "text-rose-600"}`}
+                >
+                  {featured.sym} {fmtPct(featuredPct)}
+                </div>
               </div>
               <div className="absolute -bottom-3 -right-2 hidden rotate-[3deg] rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:block">
-                <div className="text-[10px] font-medium text-muted-foreground">HEDEF</div>
-                <div className="font-mono text-sm font-bold text-primary">₺ 142.50</div>
+                <div className="text-[10px] font-medium text-muted-foreground">SON FİYAT</div>
+                <div className="font-mono text-sm font-bold text-primary">
+                  ₺{fmtPrice(featured.price)}
+                </div>
               </div>
             </div>
           </div>
@@ -535,7 +544,7 @@ function Index() {
                 Haziran ayında paylaştığımız önerilerden bazıları ve gerçekleşen sonuçlar
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 sm:gap-4">
               {gains.map((s) => (
                 <div
                   key={s.sym}
