@@ -211,7 +211,12 @@ function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-3 sm:h-16 sm:px-4">
-        <a href="#" className="flex min-w-0 items-center gap-2 sm:gap-2.5">
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex min-w-0 items-center gap-2 sm:gap-2.5"
+          aria-label="Trader Melek - Sayfa başına dön"
+        >
           <img
             src={logo}
             alt="Trader Melek"
@@ -222,7 +227,7 @@ function SiteHeader() {
           <span className="font-display text-base font-bold tracking-tight text-foreground sm:text-lg">
             Trader Melek
           </span>
-        </a>
+        </button>
         <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
           <a href="#nasil-calisir" className="transition-colors hover:text-foreground">
             Nasıl Çalışır

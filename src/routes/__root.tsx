@@ -140,6 +140,26 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Yenilemede tarayıcının eski kaydırma konumunu geri yüklemesini engelle.
+  // Asenkron yüklenen içerik (canlı panel, görseller) yüksekliği değiştirdiği
+  // için bu davranış sayfayı yanlış konuma (ortaya) atıyordu. Bir hash varsa
+  // (örn. #sss) ilgili bölüme git, yoksa en üstten başla.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    const hash = window.location.hash;
+    if (hash && hash.length > 1) {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+      if (el) {
+        el.scrollIntoView();
+        return;
+      }
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
