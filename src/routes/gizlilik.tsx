@@ -44,83 +44,28 @@ function GizlilikPage() {
           Son güncelleme: {new Date().toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}
         </p>
 
-        <div className="mt-10 space-y-8 text-sm leading-relaxed text-muted-foreground">
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">1. Genel Bilgi</h2>
-            <p className="mt-2">
-              tradermelekay.com (&ldquo;Site&rdquo;) olarak, ziyaretçilerimizin gizliliğine saygı
-              duyuyoruz. Bu gizlilik politikası, sitemizi ziyaret ettiğinizde toplanan bilgilerin
-              nasıl kullanıldığını açıklar.
-            </p>
-          </section>
+        <div className="mt-10 space-y-6 text-sm leading-relaxed text-muted-foreground">
+          <p>
+            tradermelekay.com (&ldquo;Site&rdquo;) olarak ziyaretçilerimizin gizliliğine önem
+            veriyoruz. Kişisel verileriniz yürürlükteki mevzuata uygun olarak korunur ve izniniz
+            olmadan üçüncü kişilerle paylaşılmaz.
+          </p>
 
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">2. Toplanan Bilgiler</h2>
-            <p className="mt-2">
-              Sitemiz bir landing page olup doğrudan kayıt formu bulundurmaz. Telegram grubuna
-              katılım Telegram platformu üzerinden gerçekleşir. Sitemizi ziyaret ettiğinizde
-              aşağıdaki bilgiler otomatik olarak toplanabilir:
-            </p>
-            <ul className="mt-2 list-inside list-disc space-y-1">
-              <li>IP adresi ve tarayıcı bilgisi (sunucu logları)</li>
-              <li>Çerezler aracılığıyla anonim kullanım istatistikleri</li>
-              <li>Reklam platformları (Google Ads, Meta Ads) tarafından dönüşüm takibi verileri</li>
-            </ul>
-          </section>
+          <p>
+            Sitemizin sunduğu hizmetlerden faydalanmanız, bu gizlilik politikasını kabul ettiğiniz
+            anlamına gelir. Politikamızda zaman zaman güncelleme yapma hakkımız saklıdır.
+          </p>
 
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">3. Çerezler</h2>
-            <p className="mt-2">
-              Sitemiz, kullanıcı deneyimini iyileştirmek ve reklam performansını ölçmek amacıyla
-              çerezler kullanabilir. Tarayıcı ayarlarınızdan çerezleri devre dışı bırakabilirsiniz;
-              ancak bu durumda sitenin bazı özellikleri düzgün çalışmayabilir.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">4. Üçüncü Taraf Hizmetler</h2>
-            <p className="mt-2">
-              Sitemiz aşağıdaki üçüncü taraf hizmetlerini kullanabilir:
-            </p>
-            <ul className="mt-2 list-inside list-disc space-y-1">
-              <li>Google Analytics / Google Ads (dönüşüm takibi)</li>
-              <li>Meta Pixel (Facebook/Instagram reklam takibi)</li>
-              <li>Telegram (grup katılım bağlantısı)</li>
-              <li>Vercel (site barındırma)</li>
-            </ul>
-            <p className="mt-2">
-              Bu hizmetlerin kendi gizlilik politikaları geçerlidir.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">5. Veri Güvenliği</h2>
-            <p className="mt-2">
-              Kişisel verilerinizi korumak için uygun teknik ve idari önlemler alıyoruz. Sitemiz
-              HTTPS şifrelemesi ile korunmaktadır.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">6. Haklarınız</h2>
-            <p className="mt-2">
-              KVKK kapsamında kişisel verilerinize erişim, düzeltme ve silme talebinde bulunma
-              hakkına sahipsiniz. Talepleriniz için bizimle iletişime geçebilirsiniz.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">7. İletişim</h2>
-            <p className="mt-2">
-              Gizlilik politikamız hakkında sorularınız için:{" "}
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="font-medium text-primary underline-offset-4 hover:underline"
-              >
-                {CONTACT_EMAIL}
-              </a>
-            </p>
-          </section>
+          <p>
+            Gizliliğinizle ilgili her türlü soru, talep ve görüşünüz için bizimle iletişime
+            geçebilirsiniz:{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </p>
         </div>
       </main>
 
