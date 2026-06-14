@@ -1,25 +1,28 @@
 import { useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getMarketData, type GainPoint } from "@/lib/api/market.functions";
 
-export type LiveStock = {
-  sym: string;
-  price: number;
-  prevClose: number;
-};
+export type LiveStock = { sym: string; price: number; prevClose: number };
+export type GainItem = GainPoint;
 
-// Temsili başlangıç fiyatları. Gerçek anlık BIST verisi için bir veri
-// sağlayıcı (API) bağlanması gerekir; bu değerler piyasa saatlerinde
-// gerçekçi biçimde hareket eder.
-const BASE: LiveStock[] = [
-  { sym: "THYAO", price: 318.75, prevClose: 312.0 },
-  { sym: "ASELS", price: 176.4, prevClose: 171.2 },
-  { sym: "SISE", price: 48.92, prevClose: 47.5 },
-  { sym: "EREGL", price: 56.15, prevClose: 54.3 },
-  { sym: "TUPRS", price: 188.3, prevClose: 184.0 },
-  { sym: "KCHOL", price: 236.5, prevClose: 232.1 },
-  { sym: "BIMAS", price: 521.0, prevClose: 514.5 },
-  { sym: "GARAN", price: 139.7, prevClose: 135.2 },
-  { sym: "AKBNK", price: 72.85, prevClose: 70.9 },
-  { sym: "FROTO", price: 1268.0, prevClose: 1240.0 },
+// Gerçek veri yüklenene kadar (veya kaynak erişilemezse) gösterilecek makul
+// yedek değerler. Site hiçbir koşulda kırılmaz.
+const FALLBACK_LIVE: LiveStock[] = [
+  { sym: "THYAO", price: 307.75, prevClose: 303.1 },
+  { sym: "ASELS", price: 371.25, prevClose: 377.75 },
+  { sym: "SISE", price: 39.8, prevClose: 39.1 },
+  { sym: "EREGL", price: 25.4, prevClose: 25.1 },
+  { sym: "TUPRS", price: 172.5, prevClose: 170.2 },
+  { sym: "GARAN", price: 138.4, prevClose: 135.9 },
+  { sym: "AKBNK", price: 71.85, prevClose: 70.95 },
+  { sym: "FROTO", price: 1268.0, prevClose: 1255.0 },
+];
+
+const FALLBACK_GAINS: GainItem[] = [
+  { sym: "THYAO", date: "22 Mayıs", entry: 268.5, current: 307.75 },
+  { sym: "TUPRS", date: "19 Mayıs", entry: 151.2, current: 172.5 },
+  { sym: "GARAN", date: "27 Mayıs", entry: 122.3, current: 138.4 },
+  { sym: "FROTO", date: "16 Mayıs", entry: 1142.0, current: 1268.0 },
 ];
 
 function istanbulNow(): Date {
@@ -38,6 +41,10 @@ export function pctOf(s: LiveStock): number {
   return ((s.price - s.prevClose) / s.prevClose) * 100;
 }
 
+export function gainPct(g: GainItem): number {
+  return ((g.current - g.entry) / g.entry) * 100;
+}
+
 export function fmtPrice(n: number): string {
   return n.toFixed(2).replace(".", ",");
 }
@@ -47,10 +54,30 @@ export function fmtPct(p: number): string {
   return `${sign}%${Math.abs(p).toFixed(2).replace(".", ",")}`;
 }
 
-export function useLiveBist() {
-  const [stocks, setStocks] = useState<LiveStock[]>(() => BASE.map((s) => ({ ...s })));
+export function useMarketData() {
+  const query = useQuery({
+    queryKey: ["bist-market"],
+    queryFn: () => getMarketData(),
+    refetchInterval: 30_000,
+    staleTime: 25_000,
+  });
+
+  const real =
+    query.data && query.data.live.length > 0 ? query.data.live : FALLBACK_LIVE;
+  const gains =
+    query.data && query.data.gains.length > 0 ? query.data.gains : FALLBACK_GAINS;
+
+  const [display, setDisplay] = useState<LiveStock[]>(FALLBACK_LIVE);
   const [marketOpen, setMarketOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const baseRef = useRef<LiveStock[]>(FALLBACK_LIVE);
+
+  // Gerçek veri her güncellendiğinde tabanı yeniden gerçek fiyatlara sabitle.
+  useEffect(() => {
+    baseRef.current = real;
+    setDisplay(real);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.dataUpdatedAt]);
 
   useEffect(() => {
     setMounted(true);
@@ -59,28 +86,26 @@ export function useLiveBist() {
     updateOpen();
     const openTimer = setInterval(updateOpen, 30_000);
 
-    const tick = setInterval(() => {
+    // Piyasa açıkken görsel canlılık için çok küçük (±%0.06) salınım. Her
+    // gerçek veri çekiminde taban yeniden sabitlendiği için değerler
+    // gerçek fiyattan anlamlı şekilde sapmaz.
+    const jitter = setInterval(() => {
       if (!isMarketOpen(istanbulNow())) return;
-      setStocks((prev) =>
-        prev.map((s) => {
-          const vol = 0.0018; // tik başına ~%0.18 oynaklık
-          const drift = (Math.random() - 0.5) * 2 * vol;
-          let next = s.price * (1 + drift);
-          const min = s.prevClose * 0.9;
-          const max = s.prevClose * 1.1;
-          next = Math.min(max, Math.max(min, next));
-          return { ...s, price: next };
-        }),
+      setDisplay(
+        baseRef.current.map((s) => ({
+          ...s,
+          price: s.price * (1 + (Math.random() - 0.5) * 0.0012),
+        })),
       );
-    }, 2000);
+    }, 2500);
 
     return () => {
       clearInterval(openTimer);
-      clearInterval(tick);
+      clearInterval(jitter);
     };
   }, []);
 
-  return { stocks, marketOpen, mounted };
+  return { stocks: display, gains, marketOpen, mounted };
 }
 
 function StatusPill({ marketOpen, mounted }: { marketOpen: boolean; mounted: boolean }) {
@@ -120,7 +145,7 @@ export function LiveTicker({
             <span className="flex items-center gap-2">
               <StatusPill marketOpen={marketOpen} mounted={mounted} />
               <span className="opacity-30">|</span>
-              <span className="opacity-60">BIST 100</span>
+              <span className="opacity-60">BIST</span>
             </span>
             {stocks.map((s) => {
               const p = pctOf(s);
