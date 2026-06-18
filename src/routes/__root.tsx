@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import {
+  META_PIXEL_ID,
+  META_PIXEL_SCRIPT,
+  attachTelegramLeadTracking,
+} from "../lib/meta-pixel";
 
 function NotFoundComponent() {
   return (
@@ -128,8 +133,18 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="tr">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: META_PIXEL_SCRIPT }} />
       </head>
       <body>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            alt=""
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
@@ -159,6 +174,9 @@ function RootComponent() {
     }
     window.scrollTo(0, 0);
   }, []);
+
+  // Meta Pixel: Telegram link tıklamalarında Lead dönüşümü gönder.
+  useEffect(() => attachTelegramLeadTracking(), []);
 
   return (
     <QueryClientProvider client={queryClient}>
