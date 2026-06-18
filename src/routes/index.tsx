@@ -66,7 +66,7 @@ const LEGAL_DISCLAIMER =
   "YASAL UYARI: Bu web sitesinde ve bağlı Telegram kanalında yer alan tüm analizler, grafikler, yorumlar ve paylaşımlar tamamen eğitim ve kişisel gelişim amaçlıdır. Sermaye Piyasası Kurulu (SPK) mevzuatı kapsamında kesinlikle 'Yatırım Danışmanlığı' ve portföy yönetimi teşkil etmez. Burada yer alan bilgilere dayanarak yatırım kararı verilmesi beklentilerinize uygun sonuçlar doğurmayabilir.";
 
 const PERF_NOTE = "*Geçmiş performanslar, gelecek sonuçların garantisi değildir.";
-const TELEGRAM_LINK = "https://t.me/+xTDQZElzQspmZDg5";
+const TELEGRAM_LINK = "https://t.me/+7ztsj596C1Q5ZjA0";
 const CONTACT_EMAIL = "destek@tradermelekay.com";
 
 const steps = [
