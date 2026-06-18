@@ -45,52 +45,56 @@ import member6 from "@/assets/member-6.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Trader Melek — BIST 100 Günlük Hisse Önerileri & Teknik Analiz" },
+      { title: "Trader Melek — BIST 100 Teknik Analiz & Finansal Okuryazarlık" },
       {
         name: "description",
         content:
-          "Trader Melek ile her sabah BIST 100 hisse önerileri, hedef fiyatlar ve teknik analizler doğrudan Telegram'da. Analiz topluluğuna ücretsiz katıl.",
+          "Trader Melek ile her sabah BIST 100 teknik analiz paylaşımları, grafik yorumları ve eğitim içerikleri Telegram'da. Ücretsiz analiz topluluğuna katıl.",
       },
-      { property: "og:title", content: "Trader Melek — BIST 100 Günlük Hisse Önerileri & Teknik Analiz" },
+      { property: "og:title", content: "Trader Melek — BIST 100 Teknik Analiz & Finansal Okuryazarlık" },
       {
         property: "og:description",
         content:
-          "Her sabah BIST 100 hisse önerileri, hedef fiyatlar ve teknik analizler doğrudan Telegram'da. Analiz topluluğuna ücretsiz katıl.",
+          "Her sabah BIST 100 teknik analiz paylaşımları ve eğitim içerikleri Telegram'da. Ücretsiz analiz topluluğuna katıl.",
       },
     ],
   }),
   component: Index,
 });
 
+const LEGAL_DISCLAIMER =
+  "YASAL UYARI: Bu web sitesinde ve bağlı Telegram kanalında yer alan tüm analizler, grafikler, yorumlar ve paylaşımlar tamamen eğitim ve kişisel gelişim amaçlıdır. Sermaye Piyasası Kurulu (SPK) mevzuatı kapsamında kesinlikle 'Yatırım Danışmanlığı' ve portföy yönetimi teşkil etmez. Burada yer alan bilgilere dayanarak yatırım kararı verilmesi beklentilerinize uygun sonuçlar doğurmayabilir.";
+
+const PERF_NOTE = "*Geçmiş performanslar, gelecek sonuçların garantisi değildir.";
 const TELEGRAM_LINK = "https://t.me/+xTDQZElzQspmZDg5";
 const CONTACT_EMAIL = "destek@tradermelekay.com";
 
 const steps = [
   {
     step: "01",
-    title: "Telegram'a Katıl",
-    description: "Tek tıkla ücretsiz gruba gir. Kayıt, kart veya ücret yok.",
+    title: "Analiz Grubuna Katıl",
+    description: "Tek tıkla ücretsiz topluluğa gir. Kayıt, kart veya ücret yok.",
     icon: MessageCircle,
   },
   {
     step: "02",
-    title: "Sabah Önerilerini Al",
-    description: "Her sabah 3-5 BIST 100 hissesi, giriş fiyatı, hedef ve stop seviyeleriyle.",
+    title: "Sabah Analizlerini Al",
+    description: "Her sabah 3-5 BIST 100 hissesi için teknik analiz, hedef ve stop seviyeleri.",
     icon: Clock,
   },
   {
     step: "03",
-    title: "Disiplinli İşlem Yap",
-    description: "Net seviyelerle riskini kontrol et, piyasayı kovalamak yerine planlı ilerle.",
+    title: "Strateji Geliştir",
+    description: "Net seviyelerle risk yönetimini öğren, piyasayı kovalamak yerine planlı ilerle.",
     icon: Target,
   },
 ];
 
 const features = [
   {
-    title: "Günlük BIST 100 Hisse Önerileri",
+    title: "Günlük BIST 100 Teknik Analiz Paylaşımları",
     description:
-      "Her gün 3-5 adet detaylı teknik ve temel analizle desteklenmiş BIST 100 hisse önerisi. Hangi hisse, ne zaman, hangi fiyattan — hepsi net.",
+      "Her gün 3-5 adet teknik ve temel analizle desteklenmiş BIST 100 paylaşımı. Hangi hisse, hangi seviyeler — eğitim amaçlı ve net.",
     icon: TrendingUp,
     gradient: "from-primary to-emerald-600",
     glow: "bg-primary/10",
@@ -98,7 +102,7 @@ const features = [
   {
     title: "Teknik Analiz ve Hedef Fiyatlar",
     description:
-      "Destek, direnç, hedef ve stop seviyeleriyle birlikte profesyonel grafik yorumlamaları. Riskini kontrol altında tutarak kârını maksimize et.",
+      "Destek, direnç, hedef ve stop seviyeleriyle birlikte profesyonel grafik yorumlamaları. Risk yönetimi ve finansal okuryazarlık odaklı eğitim içerikleri.",
     icon: BarChart3,
     gradient: "from-amber-500 to-orange-500",
     glow: "bg-amber-400/15",
@@ -114,7 +118,7 @@ const features = [
   {
     title: "Ücretsiz Portföy Analizi",
     description:
-      "Mevcut portföyünü ekibimize ilet, hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini ücretsiz değerlendirelim. Sana özel öneriler bir arada.",
+      "Mevcut portföyünü ekibimize ilet; hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini eğitim amaçlı ücretsiz değerlendirelim.",
     icon: PieChart,
     gradient: "from-violet-500 to-indigo-500",
     glow: "bg-violet-400/15",
@@ -126,60 +130,60 @@ const testimonials = [
     name: "Mehmet K.",
     role: "Bireysel Yatırımcı",
     avatar: member1,
-    text: "3 ayda portföyüm %42 büyüdü. Sabah önerileri sayesinde artık piyasayı kovalamıyorum, piyasa beni bekliyor.",
+    text: "3 ayda portföyümde belirgin bir gelişim gördüm. Sabah analizleri sayesinde artık piyasayı kovalamıyorum, daha planlı ilerliyorum.",
   },
   {
     name: "Elif D.",
     role: "Aktif Trader",
     avatar: member2,
-    text: "Hedef fiyat ve stop seviyeleri net veriliyor. Disiplinli işlem yapmayı bu grupta öğrendim. Kesinlikle tavsiye ederim.",
+    text: "Hedef fiyat ve stop seviyeleri net paylaşılıyor. Disiplinli strateji geliştirmeyi bu toplulukta öğrendim. Kesinlikle tavsiye ederim.",
   },
   {
     name: "Burak Y.",
     role: "Yeni Başlayan",
     avatar: member3,
-    text: "Borsayı yeni öğreniyordum, ekibin teknik analizleri sayesinde ilk ayımda bile kazançla çıktım. Topluluk müthiş.",
+    text: "Borsayı yeni öğreniyordum, ekibin teknik analizleri sayesinde ilk ayımda bile olumlu sonuçlar aldım. Topluluk çok destekleyici.",
   },
   {
     name: "Hakan S.",
     role: "Serbest Muhasebeci",
     avatar: member4,
-    text: "2 yıldır borsadayım ama bu kadar disiplinli ve net öneriler ilk kez görüyorum. ASELS ve THYAO önerileriyle bu ay ciddi getiri yakaladım.",
+    text: "2 yıldır borsadayım ama bu kadar disiplinli ve net analiz paylaşımları ilk kez görüyorum. ASELS ve THYAO analizleriyle bu ay iyi bir performans yakaladım.",
   },
   {
     name: "Zeynep A.",
     role: "Küçük Yatırımcı",
     avatar: member5,
-    text: "Küçük sermayeyle büyümek isteyenler için biçilmiş kaftan. Her gün 3-5 hisse önerisi ve hedef fiyatlar tam benlik. Çok teşekkürler ekibe!",
+    text: "Finansal okuryazarlığını geliştirmek isteyenler için harika bir topluluk. Her gün 3-5 teknik analiz paylaşımı tam benlik. Çok teşekkürler ekibe!",
   },
   {
     name: "Cemil T.",
     role: "Emekli Bankacı",
     avatar: member6,
-    text: "40 yıllık finans tecrübem var, bu ekibin analiz kalitesi gerçekten profesyonel. Sadece öneri değil, nedenini de anlatıyorlar. Efsane.",
+    text: "40 yıllık finans tecrübem var, bu ekibin analiz kalitesi gerçekten profesyonel. Sadece paylaşım değil, nedenini de anlatıyorlar.",
   },
 ];
 
 const faqs = [
   {
     q: "Trader Melek tamamen ücretsiz mi?",
-    a: "Evet. Telegram grubuna katılım, günlük öneriler ve teknik analizler tamamen ücretsizdir. Gizli ücret, abonelik veya satış baskısı yoktur.",
+    a: "Evet. Telegram topluluğuna katılım, günlük analiz paylaşımları ve teknik analiz eğitimleri tamamen ücretsizdir. Gizli ücret, abonelik veya satış baskısı yoktur.",
   },
   {
-    q: "Her gün kaç hisse önerisi paylaşılıyor?",
-    a: "Her sabah 3-5 adet BIST 100 hissesi paylaşılır. Her öneride giriş fiyatı, hedef fiyat ve stop seviyesi net olarak belirtilir.",
+    q: "Her gün kaç analiz paylaşılıyor?",
+    a: "Her sabah 3-5 adet BIST 100 hissesi için teknik analiz paylaşılır. Her paylaşımda giriş, hedef ve stop seviyeleri eğitim amaçlı olarak belirtilir.",
   },
   {
     q: "Ücretsiz portföy analizi nasıl çalışıyor?",
-    a: "Gruba katıldıktan sonra mevcut portföyünü bizimle paylaşman yeterli. Hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini değerlendirip sana özel öneriler sunuyoruz — tamamen ücretsiz.",
+    a: "Topluluğa katıldıktan sonra mevcut portföyünü bizimle paylaşman yeterli. Hisse dağılımını, risk seviyeni ve güçlü/zayıf yönlerini eğitim amaçlı değerlendirip genel bir analiz sunuyoruz — tamamen ücretsiz.",
   },
   {
-    q: "Başarı oranı %87+ gerçek mi?",
-    a: "Son 6 ayda paylaşılan hisse önerilerinin büyük çoğunluğu hedef fiyatına ulaşmıştır. Tüm geçmiş performans verileri grupta şeffaf olarak paylaşılır.",
+    q: "Hedef uyum oranı %87+ nedir?",
+    a: "Son 6 ayda paylaşılan teknik analizlerin büyük çoğunluğu belirlenen hedef seviyelerine ulaşmıştır. Geçmiş performanslar gelecek sonuçların garantisi değildir; tüm veriler grupta şeffaf olarak paylaşılır.",
   },
   {
     q: "Yeni başlayanlar da katılabilir mi?",
-    a: "Kesinlikle. Öneriler net seviyelerle verildiği için borsayı yeni öğrenenler de kolayca takip edebilir. Topluluk sorulara yardımcı olur.",
+    a: "Kesinlikle. Analiz paylaşımları net seviyelerle verildiği için borsayı yeni öğrenenler de kolayca takip edebilir. Topluluk sorulara yardımcı olur.",
   },
   {
     q: "İstediğim zaman ayrılabilir miyim?",
@@ -190,7 +194,7 @@ const faqs = [
 function TelegramButton({
   size = "xl",
   className = "",
-  label = "Telegram Grubuna Katıl",
+  label = "Analiz Grubuna Katıl",
 }: {
   size?: "lg" | "xl";
   className?: string;
@@ -245,7 +249,7 @@ function SiteHeader() {
         <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
           <Button variant="cta" size="sm" className="glow-primary">
             <TrendingUp className="h-4 w-4" />
-            Katıl
+            Topluluk
           </Button>
         </a>
       </div>
@@ -272,8 +276,8 @@ function SiteFooter() {
               </span>
             </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              BIST 100 odaklı günlük hisse önerileri ve teknik analiz topluluğu. Her sabah
-              profesyonel analizler doğrudan Telegram'da.
+              BIST 100 odaklı günlük teknik analiz paylaşımları ve finansal okuryazarlık
+              topluluğu. Her sabah eğitim amaçlı analizler doğrudan Telegram&apos;da.
             </p>
           </div>
           <div>
@@ -327,11 +331,14 @@ function SiteFooter() {
             </ul>
           </div>
         </div>
-        <div className="mt-10 border-t border-border pt-6">
-          <p className="text-center text-xs leading-relaxed text-muted-foreground/70">
-            &copy; {new Date().getFullYear()} Trader Melek — tradermelekay.com. Tüm hakları saklıdır.
-            Paylaşılan bilgiler eğitim ve bilgilendirme amaçlıdır; geçmiş performans gelecek
-            sonuçların garantisi değildir.
+        <div className="mt-10 space-y-4 border-t border-border pt-6">
+          <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            <strong className="font-semibold text-foreground">YASAL UYARI:</strong>{" "}
+            {LEGAL_DISCLAIMER.replace("YASAL UYARI: ", "")}
+          </p>
+          <p className="text-center text-xs text-muted-foreground/70">
+            &copy; {new Date().getFullYear()} Trader Melek — tradermelekay.com. Tüm hakları
+            saklıdır.
           </p>
         </div>
       </div>
@@ -461,7 +468,7 @@ function LivePanel({
         {topGain && (
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border bg-emerald-500/5 px-4 py-3 text-sm">
             <TrendingUp className="h-4 w-4 text-emerald-600" />
-            <span className="text-muted-foreground">Son kazanç örneği:</span>
+            <span className="text-muted-foreground">Son performans örneği:</span>
             <span className="font-semibold text-foreground">{topGain.sym}</span>
             <span className="font-mono font-bold text-emerald-600">{fmtPct(gainPct(topGain))}</span>
             <span className="text-xs text-muted-foreground">({topGain.date} → bugün)</span>
@@ -502,25 +509,25 @@ function Index() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            12.500+ yatırımcı aramıza katıldı
+            Binlerce yatırımcı topluluğumuza katıldı
           </div>
 
           <h1 className="max-w-4xl text-balance text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
-            BIST 100&apos;de Kazananların{" "}
+            BIST 100&apos;de{" "}
             <span className="bg-gradient-to-r from-primary to-emerald-500 bg-clip-text text-transparent">
-              Gizli Adresi
+              Teknik Analiz Topluluğu
             </span>
           </h1>
 
           <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl">
             <strong className="font-semibold text-foreground">Trader Melek</strong> analiz ekibi
-            her sabah potansiyel getirisi yüksek BIST 100 hisselerini inceliyor ve doğrudan
-            Telegram&apos;a düşürüyor. Teknik analiz, hedef fiyat, stop seviyeleri — hepsi tek bir
-            ücretsiz grupta.
+            her sabah BIST 100 hisselerini teknik analiz ve grafik yorumlarıyla inceliyor,
+            eğitim amaçlı paylaşımları doğrudan Telegram&apos;a iletiyor. Hedef fiyat, stop
+            seviyeleri ve strateji notları — hepsi tek bir ücretsiz toplulukta.
           </p>
 
           <div className="mt-8 flex w-full flex-col items-center gap-3 sm:mt-10 sm:gap-4">
-            <TelegramButton className="w-full sm:w-auto" label="Gruba Ücretsiz Katıl" />
+            <TelegramButton className="w-full sm:w-auto" label="Ücretsiz Topluluğa Katıl" />
             <p className="text-xs text-muted-foreground">
               10 saniye sürer. Asla spam yok. İstediğin zaman ayrılabilirsin.
             </p>
@@ -550,13 +557,16 @@ function Index() {
 
           {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-muted-foreground sm:mt-16 sm:gap-8">
-            <div className="flex items-center gap-2 text-xs sm:text-sm">
-              <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>%87+ Başarı Oranı</span>
+            <div className="flex flex-col items-center gap-0.5">
+              <div className="flex items-center gap-2 text-xs sm:text-sm">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <span>%87+ Hedef Uyum Oranı</span>
+              </div>
+              <span className="text-[10px] text-muted-foreground/70">{PERF_NOTE}</span>
             </div>
             <div className="flex items-center gap-2 text-xs sm:text-sm">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>Günlük BIST 100 Önerileri</span>
+              <span>Günlük Teknik Analiz Paylaşımları</span>
             </div>
             <div className="flex items-center gap-2 text-xs sm:text-sm">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
@@ -573,7 +583,7 @@ function Index() {
                 3 Adımda Başla
               </h2>
               <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                10 saniyede gruba katıl, sabah önerilerini al, disiplinli işlem yap.
+                10 saniyede topluluğa katıl, sabah analizlerini al, strateji geliştir.
               </p>
             </div>
             <div className="grid gap-6 sm:grid-cols-3">
@@ -606,7 +616,7 @@ function Index() {
                 İçeride Neler Var
               </h2>
               <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                BIST 100&apos;de öne geçmek için ihtiyacın olan her şey — her gün kapında
+                BIST 100&apos;de finansal okuryazarlığını geliştirmek için ihtiyacın olan her şey — her gün kapında
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
@@ -643,18 +653,19 @@ function Index() {
                 <div className="bg-gradient-to-br from-emerald-500 to-primary bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
                   %87+
                 </div>
-                <div className="mt-2 text-sm font-semibold text-foreground">Başarı Oranı</div>
+                <div className="mt-2 text-sm font-semibold text-foreground">Hedef Uyum Oranı</div>
                 <div className="mt-1 text-xs text-muted-foreground">
-                  Son 6 ayda hedefe ulaşan öneriler
+                  Son 6 ayda hedef seviyeye ulaşan analizler
                 </div>
+                <div className="mt-2 text-[10px] text-muted-foreground/70">{PERF_NOTE}</div>
               </div>
               <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:p-8">
                 <div className="bg-gradient-to-br from-amber-500 to-orange-500 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
                   3-5
                 </div>
-                <div className="mt-2 text-sm font-semibold text-foreground">Günlük Hisse</div>
+                <div className="mt-2 text-sm font-semibold text-foreground">Günlük Analiz</div>
                 <div className="mt-1 text-xs text-muted-foreground">
-                  Her gün detaylı analizli öneriler
+                  Her gün detaylı teknik analiz paylaşımları
                 </div>
               </div>
               <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:p-8">
@@ -663,7 +674,7 @@ function Index() {
                 </div>
                 <div className="mt-2 text-sm font-semibold text-foreground">Aktif Üye</div>
                 <div className="mt-1 text-xs text-muted-foreground">
-                  Her gün büyüyen yatırımcı topluluğu
+                  Her gün büyüyen analiz topluluğu
                 </div>
               </div>
             </div>
@@ -675,11 +686,12 @@ function Index() {
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 text-center sm:mb-16">
               <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Gerçek Fiyatlarla Kazanç Örnekleri
+                Gerçek Fiyatlarla Performans Örnekleri
               </h2>
               <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                Öneri günündeki gerçek BIST fiyatı ile güncel fiyat baz alınarak hesaplanmıştır.
+                Eğitim amaçlı; giriş günündeki gerçek BIST fiyatı ile güncel fiyat karşılaştırması.
               </p>
+              <p className="mt-2 text-[11px] text-muted-foreground/70">{PERF_NOTE}</p>
             </div>
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 sm:gap-4">
               {gains.map((s) => {
@@ -737,10 +749,10 @@ function Index() {
               <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
               <div className="text-center">
                 <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-                  12.500+ Yatırımcı Neden Katıldı
+                  Binlerce Yatırımcı Neden Katıldı
                 </h2>
                 <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                  Gerçek üyeler, gerçek kazançlar. İşte bu topluluğu farklı kılan şeyler.
+                  Gerçek üyeler, paylaşılan deneyimler. İşte bu topluluğu farklı kılan şeyler.
                 </p>
               </div>
               <div className="relative mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6">
@@ -752,8 +764,8 @@ function Index() {
                   },
                   {
                     icon: Target,
-                    title: "%87+ Başarı Oranı",
-                    text: "Son 6 ayda paylaşılan hisse önerilerinin büyük çoğunluğu hedef fiyatına ulaştı. Rakamlar konuşur.",
+                    title: "%87+ Hedef Uyum Oranı",
+                    text: "Son 6 ayda paylaşılan teknik analizlerin büyük çoğunluğu hedef seviyelerine ulaşmıştır. Geçmiş performans gelecek sonuçların garantisi değildir.",
                   },
                   {
                     icon: Zap,
@@ -791,7 +803,11 @@ function Index() {
                 Üyelerimiz Ne Diyor
               </h2>
               <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                Gerçek yatırımcılar, gerçek sonuçlar.
+                Topluluk üyelerinin paylaştığı deneyimler.
+              </p>
+              <p className="mt-2 text-[11px] text-muted-foreground/70">
+                *Kişisel deneyimler bireysel sonuçları yansıtır; gelecek performans garantisi
+                değildir.
               </p>
             </div>
             <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
@@ -860,11 +876,11 @@ function Index() {
               <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
               <div className="absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
               <h2 className="relative text-2xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
-                Sermayeni Büyütme Fırsatını Kaçırma
+                Finansal Okuryazarlığını Geliştir
               </h2>
               <p className="relative mx-auto mt-4 max-w-xl text-base text-primary-foreground/85 sm:text-lg">
-                Her gün binlerce yatırımcı BIST 100&apos;de öne geçiyor. Trader Melek analiz
-                desteğiyle sen de aralarına katıl.
+                Her gün binlerce yatırımcı BIST 100&apos;de teknik analiz ve strateji paylaşımlarıyla
+                bilgi ediniyor. Trader Melek analiz topluluğuna sen de katıl.
               </p>
               <div className="relative mt-8 sm:mt-10">
                 <a
@@ -878,7 +894,7 @@ function Index() {
                     className="group w-full bg-background text-foreground hover:bg-background/90 sm:w-auto sm:text-lg"
                   >
                     <TrendingUp className="h-5 w-5 transition-transform group-hover:scale-110" />
-                    Gruba Ücretsiz Katıl
+                    Analiz Grubuna Katıl
                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </a>
@@ -906,7 +922,7 @@ function Index() {
 
       {/* Mobile sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/90 p-3 backdrop-blur-lg shadow-[0_-10px_30px_-10px_rgba(0,0,0,0.1)] sm:hidden">
-        <TelegramButton size="lg" label="Telegram Grubuna Katıl" />
+        <TelegramButton size="lg" label="Analiz Grubuna Katıl" />
       </div>
     </div>
   );
