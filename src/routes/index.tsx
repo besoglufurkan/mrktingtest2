@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
@@ -217,11 +218,11 @@ function SiteHeader() {
           </span>
         </button>
         <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
-          <a href="#sonuclar" className="transition-colors hover:text-foreground">
-            İşlem Örnekleri
-          </a>
           <a href="#yorumlar" className="transition-colors hover:text-foreground">
             Yorumlar
+          </a>
+          <a href="#sonuclar" className="transition-colors hover:text-foreground">
+            İşlem Örnekleri
           </a>
           <a href="#sss" className="transition-colors hover:text-foreground">
             SSS
@@ -263,6 +264,11 @@ function SiteFooter() {
           <div>
             <h4 className="text-sm font-semibold text-foreground">Bağlantılar</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li>
+                <a href="#yorumlar" className="transition-colors hover:text-foreground">
+                  Yorumlar
+                </a>
+              </li>
               <li>
                 <a href="#sonuclar" className="transition-colors hover:text-foreground">
                   İşlem Örnekleri
@@ -454,14 +460,80 @@ function LivePanel({
   );
 }
 
+function TestimonialsSection() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? testimonials : testimonials.slice(0, 3);
+
+  return (
+    <section id="yorumlar" className="relative scroll-mt-16 px-4 py-10 sm:scroll-mt-20 sm:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-6 text-center sm:mb-12">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Üyelerden sesler
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-lg">
+            Topluluktaki gerçek deneyimler
+          </p>
+          <p className="mt-1 text-[11px] text-muted-foreground/70">
+            *Kişisel deneyimler; herkesin sonucu farklı olabilir.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          {visible.map((t) => (
+            <div
+              key={t.name}
+              className="flex flex-col rounded-2xl border border-border bg-surface p-4 shadow-sm sm:p-6"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={t.avatar}
+                  alt={t.name}
+                  width={44}
+                  height={44}
+                  loading="lazy"
+                  className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-primary/20"
+                />
+                <div className="min-w-0 text-left">
+                  <div className="font-semibold text-foreground">{t.name}</div>
+                  <div className="truncate text-xs text-muted-foreground">{t.role}</div>
+                  {t.time && (
+                    <div className="text-[10px] text-muted-foreground/70">{t.time}</div>
+                  )}
+                </div>
+              </div>
+              <div className="mt-2.5 flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3 w-3 fill-emerald-500 text-emerald-500 sm:h-3.5 sm:w-3.5" />
+                ))}
+              </div>
+              <p className="mt-2.5 text-left text-sm leading-relaxed text-foreground/90">
+                {t.text}
+              </p>
+            </div>
+          ))}
+        </div>
+        {!showAll && testimonials.length > 3 && (
+          <div className="mt-5 text-center sm:mt-6">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => setShowAll(true)}>
+              Tüm yorumları gör ({testimonials.length})
+            </Button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function TradeExamplesSection({ gains }: { gains: GainItem[] }) {
+  const [showAll, setShowAll] = useState(false);
+  const mobileGains = showAll ? gains : gains.slice(0, 4);
   const avgGain =
     gains.length > 0
       ? gains.reduce((sum, g) => sum + gainPct(g), 0) / gains.length
       : 0;
 
   return (
-    <section id="sonuclar" className="relative px-4 py-16 sm:py-24">
+    <section id="sonuclar" className="relative scroll-mt-16 px-4 py-10 sm:scroll-mt-20 sm:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 text-center sm:mb-14">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5 text-xs font-semibold text-primary">
@@ -548,7 +620,7 @@ function TradeExamplesSection({ gains }: { gains: GainItem[] }) {
         </div>
 
         <div className="space-y-3 md:hidden">
-          {gains.map((s) => {
+          {mobileGains.map((s) => {
             const g = gainPct(s);
             return (
               <div
@@ -585,6 +657,17 @@ function TradeExamplesSection({ gains }: { gains: GainItem[] }) {
               </div>
             );
           })}
+          {!showAll && gains.length > 4 && (
+            <div className="pt-1 text-center">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => setShowAll(true)}
+              >
+                Tüm örnekleri gör ({gains.length})
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -610,7 +693,7 @@ function Index() {
         <LiveTicker stocks={stocks} marketOpen={marketOpen} mounted={mounted} />
 
         {/* Hero */}
-        <section className="relative flex flex-col items-center justify-center px-4 pt-10 pb-16 text-center sm:pt-16 sm:pb-20">
+        <section className="relative flex flex-col items-center justify-center px-4 pt-8 pb-10 text-center sm:pt-16 sm:pb-20">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-[11px] font-semibold text-primary backdrop-blur-sm sm:text-xs">
             <AlertTriangle className="h-3.5 w-3.5" />
             Sınırlı kontenjan — bu hafta yerin var
@@ -624,7 +707,7 @@ function Index() {
             12.500+ kişi grupta · şu an aktif
           </div>
 
-          <h1 className="max-w-4xl text-balance text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+          <h1 className="max-w-4xl text-balance text-3xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-6xl md:text-7xl">
             Her Sabah BIST Analizi{" "}
             <span className="bg-gradient-to-r from-primary to-emerald-500 bg-clip-text text-transparent">
               Telegram&apos;da Geliyor
@@ -658,13 +741,13 @@ function Index() {
             </span>
           </div>
 
-          {/* Hero canlı panel */}
-          <div className="mt-12 w-full max-w-4xl sm:mt-16">
+          {/* Hero canlı panel — mobilde gizli (ticker + rozet yeterli) */}
+          <div className="mt-10 hidden w-full max-w-4xl sm:mt-16 sm:block">
             <LivePanel stocks={stocks} gains={gains} marketOpen={marketOpen} mounted={mounted} />
           </div>
 
           {/* Trust indicators */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-muted-foreground sm:mt-16 sm:gap-8">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-muted-foreground sm:mt-16 sm:gap-8">
             <div className="flex flex-col items-center gap-0.5">
               <div className="flex items-center gap-2 text-xs sm:text-sm">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500" />
@@ -683,10 +766,56 @@ function Index() {
           </div>
         </section>
 
+        <TestimonialsSection />
+
+        {/* Stats */}
+        <section className="relative px-4 py-8 sm:py-16">
+          <div className="mx-auto max-w-5xl">
+            <div className="grid grid-cols-3 gap-2 sm:gap-8">
+              <div className="rounded-xl border border-border bg-surface p-3 text-center shadow-sm sm:rounded-2xl sm:p-8">
+                <div className="bg-gradient-to-br from-emerald-500 to-primary bg-clip-text text-xl font-bold text-transparent sm:text-4xl">
+                  %87+
+                </div>
+                <div className="mt-1 text-[10px] font-semibold text-foreground sm:mt-2 sm:text-sm">
+                  Hedef Uyum
+                </div>
+                <div className="mt-0.5 hidden text-xs text-muted-foreground sm:block">
+                  Son 6 ayda hedef seviyeye ulaşan analizler
+                </div>
+                <div className="mt-1 hidden text-[10px] text-muted-foreground/70 sm:block">{PERF_NOTE}</div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface p-3 text-center shadow-sm sm:rounded-2xl sm:p-8">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-500 bg-clip-text text-xl font-bold text-transparent sm:text-4xl">
+                  3-5
+                </div>
+                <div className="mt-1 text-[10px] font-semibold text-foreground sm:mt-2 sm:text-sm">
+                  Günlük Analiz
+                </div>
+                <div className="mt-0.5 hidden text-xs text-muted-foreground sm:block">
+                  Her gün detaylı teknik analiz paylaşımları
+                </div>
+              </div>
+              <div className="rounded-xl border border-border bg-surface p-3 text-center shadow-sm sm:rounded-2xl sm:p-8">
+                <div className="bg-gradient-to-br from-primary to-emerald-600 bg-clip-text text-xl font-bold text-transparent sm:text-4xl">
+                  12.500+
+                </div>
+                <div className="mt-1 text-[10px] font-semibold text-foreground sm:mt-2 sm:text-sm">
+                  Aktif Üye
+                </div>
+                <div className="mt-0.5 hidden text-xs text-muted-foreground sm:block">
+                  Her gün büyüyen analiz topluluğu
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <TradeExamplesSection gains={gains} />
+
         {/* Features */}
-        <section className="relative px-4 py-16 sm:py-24">
+        <section className="relative px-4 py-10 sm:py-20">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center sm:mb-16">
+            <div className="mb-8 text-center sm:mb-14">
               <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
                 Grupta neler var?
               </h2>
@@ -698,7 +827,7 @@ function Index() {
               {features.map((f) => (
                 <div
                   key={f.title}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-glow hover:shadow-xl hover:shadow-primary/10 sm:p-8"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-glow hover:shadow-xl hover:shadow-primary/10 sm:p-8"
                 >
                   <div
                     className={`absolute -right-6 -top-6 h-24 w-24 rounded-full ${f.glow} blur-2xl transition-all group-hover:opacity-80`}
@@ -720,46 +849,8 @@ function Index() {
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="relative px-4 py-12 sm:py-20">
-          <div className="mx-auto max-w-5xl">
-            <div className="grid gap-4 sm:grid-cols-3 sm:gap-8">
-              <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:p-8">
-                <div className="bg-gradient-to-br from-emerald-500 to-primary bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
-                  %87+
-                </div>
-                <div className="mt-2 text-sm font-semibold text-foreground">Hedef Uyum Oranı</div>
-                <div className="mt-1 text-xs text-muted-foreground">
-                  Son 6 ayda hedef seviyeye ulaşan analizler
-                </div>
-                <div className="mt-2 text-[10px] text-muted-foreground/70">{PERF_NOTE}</div>
-              </div>
-              <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:p-8">
-                <div className="bg-gradient-to-br from-amber-500 to-orange-500 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
-                  3-5
-                </div>
-                <div className="mt-2 text-sm font-semibold text-foreground">Günlük Analiz</div>
-                <div className="mt-1 text-xs text-muted-foreground">
-                  Her gün detaylı teknik analiz paylaşımları
-                </div>
-              </div>
-              <div className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm sm:p-8">
-                <div className="bg-gradient-to-br from-primary to-emerald-600 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">
-                  12.500+
-                </div>
-                <div className="mt-2 text-sm font-semibold text-foreground">Aktif Üye</div>
-                <div className="mt-1 text-xs text-muted-foreground">
-                  Her gün büyüyen analiz topluluğu
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <TradeExamplesSection gains={gains} />
-
         {/* Why join */}
-        <section className="relative px-4 py-16 sm:py-24">
+        <section className="relative px-4 py-10 sm:py-20">
           <div className="mx-auto max-w-4xl">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-surface to-accent/30 p-6 shadow-xl sm:p-12 lg:p-16">
               <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
@@ -811,61 +902,10 @@ function Index() {
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section id="yorumlar" className="relative px-4 py-16 sm:py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center sm:mb-16">
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Gruptan sesler
-              </h2>
-              <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                Gerçek üyeler, kendi ağızlarıyla — kaydırmak için sola kaydır 👉
-              </p>
-              <p className="mt-2 text-[11px] text-muted-foreground/70">
-                *Kişisel deneyimler; herkesin sonucu farklı olabilir.
-              </p>
-            </div>
-            <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-3 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
-              {testimonials.map((t) => (
-                <div
-                  key={t.name}
-                  className="group relative flex min-w-[85vw] shrink-0 snap-center flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-300 hover:border-glow hover:shadow-lg hover:shadow-primary/10 sm:min-w-[72vw] sm:p-6 md:min-w-0 md:p-8"
-                >
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      width={48}
-                      height={48}
-                      loading="lazy"
-                      className="h-12 w-12 rounded-full object-cover ring-2 ring-primary/20"
-                    />
-                    <div className="min-w-0 text-left">
-                      <div className="font-semibold text-foreground">{t.name}</div>
-                      <div className="truncate text-xs text-muted-foreground">{t.role}</div>
-                      {"time" in t && t.time && (
-                        <div className="text-[10px] text-muted-foreground/70">{t.time}</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="mt-3 flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-emerald-500 text-emerald-500" />
-                    ))}
-                  </div>
-                  <p className="mt-3 flex-1 text-left text-sm leading-relaxed text-foreground/90 sm:text-base">
-                    {t.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* FAQ */}
-        <section id="sss" className="relative px-4 py-16 sm:py-24">
+        <section id="sss" className="relative scroll-mt-16 px-4 py-10 sm:scroll-mt-20 sm:py-20">
           <div className="mx-auto max-w-3xl">
-            <div className="mb-10 text-center sm:mb-16">
+            <div className="mb-8 text-center sm:mb-14">
               <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
                 Sormak istediğin bir şey var mı?
               </h2>
@@ -887,7 +927,7 @@ function Index() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative px-4 py-16 sm:py-24">
+        <section className="relative px-4 py-10 sm:py-20">
           <div className="mx-auto max-w-3xl">
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-emerald-600 to-primary p-8 text-center shadow-2xl shadow-primary/30 sm:p-14">
               <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
