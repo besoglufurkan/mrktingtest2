@@ -28,10 +28,10 @@ import {
   AlertTriangle,
   Star,
   Shield,
-  Clock,
   MessageCircle,
   Mail,
   PieChart,
+  CalendarRange,
 } from "lucide-react";
 import logo from "@/assets/trader-melek-logo.png";
 import member1 from "@/assets/member-1.jpg";
@@ -68,27 +68,6 @@ const PERF_NOTE = "*Geçmiş performanslar, gelecek sonuçların garantisi deği
 const TELEGRAM_LINK = "https://t.me/+7ztsj596C1Q5ZjA0";
 const CONTACT_EMAIL = "destek@tradermelekay.com";
 
-const steps = [
-  {
-    step: "01",
-    title: "Gruba atla",
-    description: "Tek tık yeter. Kart, form, kayıt falan yok — 10 saniyede içerdesin.",
-    icon: MessageCircle,
-  },
-  {
-    step: "02",
-    title: "Sabah mesajını oku",
-    description: "Her sabah 3-5 hisse için analiz, hedef ve stop seviyeleri gruba düşer.",
-    icon: Clock,
-  },
-  {
-    step: "03",
-    title: "Kendi planını yap",
-    description: "Ne alacağını, ne zaman çıkacağını sen belirle. Biz sadece analizi paylaşırız.",
-    icon: Target,
-  },
-];
-
 const features = [
   {
     title: "Her sabah analiz mesajı",
@@ -115,9 +94,9 @@ const features = [
     glow: "bg-rose-400/15",
   },
   {
-    title: "Ücretsiz portföy bakışı",
+    title: "Portföy değerlendirmesi",
     description:
-      "Portföyünü yaz, ekibe gönder — dağılımına ve riskine dair genel bir değerlendirme al. Bedava.",
+      "Portföyünü ekiple paylaş — dağılımına ve riskine dair genel bir değerlendirme al.",
     icon: PieChart,
     gradient: "from-violet-500 to-indigo-500",
     glow: "bg-violet-400/15",
@@ -171,8 +150,8 @@ const testimonials = [
 
 const faqs = [
   {
-    q: "Gerçekten ücretsiz mi?",
-    a: "Evet, tamamen. Gruba gir, analizleri oku, çıkmak istersen tek tıkla çık. Gizli ücret, abonelik, satış baskısı yok.",
+    q: "Topluluğa katılım ücretli mi?",
+    a: "Hayır. Telegram analiz topluluğuna doğrudan katılabilirsin. Abonelik veya gizli ücret yok.",
   },
   {
     q: "Her gün ne kadar içerik geliyor?",
@@ -180,7 +159,7 @@ const faqs = [
   },
   {
     q: "Portföy bakışı nasıl oluyor?",
-    a: "Portföyünü gruba veya ekibe yazman yeterli. Dağılımına ve riskine dair genel bir değerlendirme yapılıyor, bedava.",
+    a: "Portföyünü gruba veya ekibe yazman yeterli. Dağılımına ve riskine dair genel bir değerlendirme yapılıyor.",
   },
   {
     q: "%87 hedef uyumu ne demek?",
@@ -199,7 +178,7 @@ const faqs = [
 function TelegramButton({
   size = "xl",
   className = "",
-  label = "Gruba Katıl",
+  label = "Analiz Grubuna Katıl",
 }: {
   size?: "lg" | "xl";
   className?: string;
@@ -238,11 +217,8 @@ function SiteHeader() {
           </span>
         </button>
         <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex">
-          <a href="#nasil-calisir" className="transition-colors hover:text-foreground">
-            Nasıl Çalışır
-          </a>
           <a href="#sonuclar" className="transition-colors hover:text-foreground">
-            Sonuçlar
+            İşlem Örnekleri
           </a>
           <a href="#yorumlar" className="transition-colors hover:text-foreground">
             Yorumlar
@@ -254,7 +230,7 @@ function SiteHeader() {
         <a href={TELEGRAM_LINK} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
           <Button variant="cta" size="sm" className="glow-primary">
             <TrendingUp className="h-4 w-4" />
-            Katıl
+            Topluluğa Katıl
           </Button>
         </a>
       </div>
@@ -281,20 +257,15 @@ function SiteFooter() {
               </span>
             </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              BIST analizi sevenlerin Telegram grubu. Her sabah analiz, ara sıra uyarı — bedava.
+              BIST 100 teknik analiz topluluğu. Her sabah analiz, gün içi uyarılar ve eğitim içerikleri.
             </p>
           </div>
           <div>
             <h4 className="text-sm font-semibold text-foreground">Bağlantılar</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#nasil-calisir" className="transition-colors hover:text-foreground">
-                  Nasıl Çalışır
-                </a>
-              </li>
-              <li>
                 <a href="#sonuclar" className="transition-colors hover:text-foreground">
-                  Sonuçlar
+                  İşlem Örnekleri
                 </a>
               </li>
               <li>
@@ -472,7 +443,7 @@ function LivePanel({
         {topGain && (
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border bg-emerald-500/5 px-4 py-3 text-sm">
             <TrendingUp className="h-4 w-4 text-emerald-600" />
-            <span className="text-muted-foreground">Son örnek:</span>
+            <span className="text-muted-foreground">Mayıs–Haziran örneği:</span>
             <span className="font-semibold text-foreground">{topGain.sym}</span>
             <span className="font-mono font-bold text-emerald-600">{fmtPct(gainPct(topGain))}</span>
             <span className="text-xs text-muted-foreground">({topGain.date} → bugün)</span>
@@ -480,6 +451,143 @@ function LivePanel({
         )}
       </div>
     </div>
+  );
+}
+
+function TradeExamplesSection({ gains }: { gains: GainItem[] }) {
+  const avgGain =
+    gains.length > 0
+      ? gains.reduce((sum, g) => sum + gainPct(g), 0) / gains.length
+      : 0;
+
+  return (
+    <section id="sonuclar" className="relative px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 text-center sm:mb-14">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-1.5 text-xs font-semibold text-primary">
+            <CalendarRange className="h-3.5 w-3.5" />
+            Mayıs – Haziran 2026
+          </div>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
+            BIST 100 İşlem Örnekleri
+          </h2>
+          <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground sm:mt-4 sm:text-lg">
+            Toplulukta paylaşılan analiz giriş tarihleri ile güncel BIST kapanış fiyatları
+            karşılaştırması. Tüm veriler canlı piyasa kaynağından hesaplanır.
+          </p>
+          <p className="mt-2 text-[11px] text-muted-foreground/70">{PERF_NOTE}</p>
+        </div>
+
+        <div className="mb-8 grid grid-cols-3 gap-3 sm:gap-4">
+          <div className="rounded-xl border border-border bg-surface px-3 py-4 text-center shadow-sm sm:rounded-2xl sm:px-6 sm:py-5">
+            <div className="font-mono text-xl font-bold text-foreground sm:text-3xl">
+              {gains.length}
+            </div>
+            <div className="mt-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
+              Pozitif örnek
+            </div>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-3 py-4 text-center shadow-sm sm:rounded-2xl sm:px-6 sm:py-5">
+            <div className="font-mono text-xl font-bold text-emerald-600 sm:text-3xl">
+              {fmtPct(avgGain)}
+            </div>
+            <div className="mt-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
+              Ortalama getiri
+            </div>
+          </div>
+          <div className="rounded-xl border border-border bg-surface px-3 py-4 text-center shadow-sm sm:rounded-2xl sm:px-6 sm:py-5">
+            <div className="font-mono text-xl font-bold text-foreground sm:text-3xl">
+              BIST
+            </div>
+            <div className="mt-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">
+              Canlı veri
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden overflow-hidden rounded-2xl border border-border bg-surface shadow-sm md:block">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-border bg-muted/40 text-xs uppercase tracking-wider text-muted-foreground">
+                <th className="px-5 py-3.5 font-semibold">Hisse</th>
+                <th className="px-5 py-3.5 font-semibold">Giriş Tarihi</th>
+                <th className="px-5 py-3.5 font-semibold">Giriş Fiyatı</th>
+                <th className="px-5 py-3.5 font-semibold">Güncel Fiyat</th>
+                <th className="px-5 py-3.5 font-semibold">Süre</th>
+                <th className="px-5 py-3.5 text-right font-semibold">Getiri</th>
+              </tr>
+            </thead>
+            <tbody>
+              {gains.map((s, i) => {
+                const g = gainPct(s);
+                return (
+                  <tr
+                    key={s.sym}
+                    className={`border-b border-border/60 transition-colors last:border-0 hover:bg-muted/20 ${
+                      i % 2 === 0 ? "" : "bg-background/40"
+                    }`}
+                  >
+                    <td className="px-5 py-4 font-bold text-foreground">{s.sym}</td>
+                    <td className="px-5 py-4 text-muted-foreground">{s.date}</td>
+                    <td className="px-5 py-4 font-mono text-foreground">₺{fmtPrice(s.entry)}</td>
+                    <td className="px-5 py-4 font-mono font-semibold text-emerald-600">
+                      ₺{fmtPrice(s.current)}
+                    </td>
+                    <td className="px-5 py-4 text-muted-foreground">{s.daysHeld} gün</td>
+                    <td className="px-5 py-4 text-right">
+                      <span className="inline-flex items-center gap-1 rounded-lg bg-emerald-500/10 px-2.5 py-1 font-mono text-sm font-bold text-emerald-600">
+                        <TrendingUp className="h-3.5 w-3.5" />
+                        {fmtPct(g)}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="space-y-3 md:hidden">
+          {gains.map((s) => {
+            const g = gainPct(s);
+            return (
+              <div
+                key={s.sym}
+                className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"
+              >
+                <div className="flex items-center justify-between border-b border-border/60 bg-muted/30 px-4 py-3">
+                  <span className="text-lg font-bold text-foreground">{s.sym}</span>
+                  <span className="inline-flex items-center gap-1 rounded-lg bg-emerald-500/10 px-2.5 py-1 font-mono text-sm font-bold text-emerald-600">
+                    <TrendingUp className="h-3.5 w-3.5" />
+                    {fmtPct(g)}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-px bg-border/60">
+                  <div className="bg-surface px-4 py-3">
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      Giriş
+                    </div>
+                    <div className="mt-0.5 font-mono text-sm font-semibold text-foreground">
+                      ₺{fmtPrice(s.entry)}
+                    </div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">{s.date}</div>
+                  </div>
+                  <div className="bg-surface px-4 py-3">
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                      Güncel
+                    </div>
+                    <div className="mt-0.5 font-mono text-sm font-semibold text-emerald-600">
+                      ₺{fmtPrice(s.current)}
+                    </div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">{s.daysHeld} gün</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -525,15 +633,12 @@ function Index() {
 
           <p className="mt-5 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl">
             <strong className="font-semibold text-foreground">Trader Melek</strong> ekibi her sabah
-            BIST 100&apos;ü tarıyor, bulduğu analizleri gruba atıyor. Hedef, stop, grafik yorumu —
-            hepsi bedava. Spam yok, satış baskısı yok.
+            BIST 100&apos;ü tarıyor, teknik analizleri Telegram topluluğunda paylaşıyor. Hedef, stop
+            ve grafik yorumları — net ve uygulanabilir.
           </p>
 
-          <div className="mt-8 flex w-full flex-col items-center gap-3 sm:mt-10 sm:gap-4">
-            <TelegramButton className="w-full sm:w-auto" label="Gruba Katıl — Bedava" />
-            <p className="text-xs text-muted-foreground">
-              10 saniye sürer. Kart istemiyoruz. Beğenmezsen çıkarsın.
-            </p>
+          <div className="mt-8 flex w-full flex-col items-center sm:mt-10">
+            <TelegramButton className="w-full sm:w-auto" label="Analiz Grubuna Katıl" />
           </div>
 
           {/* Mobil canlı fiyat rozeti */}
@@ -573,40 +678,7 @@ function Index() {
             </div>
             <div className="flex items-center gap-2 text-xs sm:text-sm">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span>Ücretsiz portföy bakışı</span>
-            </div>
-          </div>
-        </section>
-
-        {/* How it works */}
-        <section id="nasil-calisir" className="relative px-4 py-16 sm:py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center sm:mb-16">
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Nasıl çalışıyor?
-              </h2>
-              <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                3 adım — gerçekten bu kadar basit.
-              </p>
-            </div>
-            <div className="grid gap-6 sm:grid-cols-3">
-              {steps.map((s) => (
-                <div
-                  key={s.step}
-                  className="group relative rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-glow hover:shadow-xl hover:shadow-primary/10 sm:p-8"
-                >
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <s.icon className="h-5 w-5" />
-                    </div>
-                    <span className="font-mono text-xs font-bold text-primary/60">{s.step}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {s.description}
-                  </p>
-                </div>
-              ))}
+              <span>Portföy değerlendirmesi</span>
             </div>
           </div>
         </section>
@@ -684,66 +756,7 @@ function Index() {
           </div>
         </section>
 
-        {/* Gains */}
-        <section id="sonuclar" className="relative px-4 py-16 sm:py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 text-center sm:mb-16">
-              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
-                Geçmişten örnekler
-              </h2>
-              <p className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg">
-                Gerçek BIST fiyatlarıyla hesaplanmış — eğitim amaçlı karşılaştırma.
-              </p>
-              <p className="mt-2 text-[11px] text-muted-foreground/70">{PERF_NOTE}</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 sm:gap-4">
-              {gains.map((s) => {
-                const g = gainPct(s);
-                return (
-                  <div
-                    key={s.sym}
-                    className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-glow hover:shadow-xl hover:shadow-emerald-500/10"
-                  >
-                    <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-emerald-500/10 blur-2xl transition-all group-hover:bg-emerald-500/20" />
-                    <div className="relative">
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-bold tracking-tight text-foreground">
-                          {s.sym}
-                        </span>
-                        <span className="text-[11px] font-medium text-muted-foreground">
-                          {s.date}
-                        </span>
-                      </div>
-                      <div className="mt-4 flex items-end justify-between">
-                        <div className="space-y-1">
-                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                            Giriş
-                          </div>
-                          <div className="font-mono text-sm font-semibold text-foreground">
-                            ₺{fmtPrice(s.entry)}
-                          </div>
-                        </div>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground/50" />
-                        <div className="space-y-1 text-right">
-                          <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                            Güncel
-                          </div>
-                          <div className="font-mono text-sm font-semibold text-emerald-600">
-                            ₺{fmtPrice(s.current)}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-emerald-500/10 py-2 text-sm font-bold text-emerald-600">
-                        <TrendingUp className="mr-1.5 h-4 w-4" />
-                        {fmtPct(g)}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <TradeExamplesSection gains={gains} />
 
         {/* Why join */}
         <section className="relative px-4 py-16 sm:py-24">
@@ -777,8 +790,8 @@ function Index() {
                   },
                   {
                     icon: Shield,
-                    title: "Bedava, gerçekten",
-                    text: "Ücretli grupların anlattığı şeylerin çoğu burada ücretsiz. Gizli fatura yok.",
+                    title: "Şeffaf paylaşım",
+                    text: "Analizler eğitim amaçlıdır; hedef ve stop seviyeleri açıkça yazılır. Geçmiş performans geleceği garanti etmez.",
                   },
                 ].map((item) => (
                   <div key={item.title} className="flex gap-4">
@@ -880,10 +893,11 @@ function Index() {
               <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
               <div className="absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-white/10 blur-2xl" />
               <h2 className="relative text-2xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
-                Bir bak, beğenirsen kal
+                Analiz topluluğuna katıl
               </h2>
               <p className="relative mx-auto mt-4 max-w-xl text-base text-primary-foreground/85 sm:text-lg">
-                Gruba gir, birkaç gün analizleri oku. Beğenmezsen çık — kimse seni tutmaz.
+                Her sabah BIST 100 teknik analizleri Telegram&apos;da. Topluluğa katıl, güncel
+                paylaşımları takip et.
               </p>
               <div className="relative mt-8 sm:mt-10">
                 <a
@@ -902,20 +916,6 @@ function Index() {
                   </Button>
                 </a>
               </div>
-              <div className="relative mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-primary-foreground/85 sm:mt-8 sm:gap-6">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  Daima Ücretsiz
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  Ücretsiz Portföy Analizi
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  Anında Erişim
-                </span>
-              </div>
             </div>
           </div>
         </section>
@@ -925,7 +925,7 @@ function Index() {
 
       {/* Mobile sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/90 p-3 backdrop-blur-lg shadow-[0_-10px_30px_-10px_rgba(0,0,0,0.1)] sm:hidden">
-        <TelegramButton size="lg" label="Analiz Grubuna Katıl" />
+        <TelegramButton size="lg" label="Topluluğa Katıl" />
       </div>
     </div>
   );

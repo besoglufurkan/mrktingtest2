@@ -19,10 +19,14 @@ const FALLBACK_LIVE: LiveStock[] = [
 ];
 
 const FALLBACK_GAINS: GainItem[] = [
-  { sym: "THYAO", date: "22 Mayıs", entry: 268.5, current: 307.75 },
-  { sym: "TUPRS", date: "19 Mayıs", entry: 151.2, current: 172.5 },
-  { sym: "GARAN", date: "27 Mayıs", entry: 122.3, current: 138.4 },
-  { sym: "FROTO", date: "16 Mayıs", entry: 1142.0, current: 1268.0 },
+  { sym: "YKBNK", date: "27 Mayıs", entry: 33.16, current: 42.88, daysHeld: 22 },
+  { sym: "AKBNK", date: "27 Mayıs", entry: 64.0, current: 81.35, daysHeld: 22 },
+  { sym: "HALKB", date: "6 Mayıs", entry: 38.12, current: 48.04, daysHeld: 43 },
+  { sym: "GARAN", date: "27 Mayıs", entry: 122.9, current: 142.5, daysHeld: 22 },
+  { sym: "ISCTR", date: "27 Mayıs", entry: 13.14, current: 15.42, daysHeld: 22 },
+  { sym: "THYAO", date: "20 Mayıs", entry: 295.0, current: 326.5, daysHeld: 29 },
+  { sym: "TCELL", date: "27 Mayıs", entry: 101.0, current: 114.5, daysHeld: 22 },
+  { sym: "VAKBN", date: "20 Mayıs", entry: 30.42, current: 34.88, daysHeld: 29 },
 ];
 
 function istanbulNow(): Date {
