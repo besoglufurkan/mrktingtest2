@@ -15,6 +15,7 @@ import {
   META_PIXEL_ID,
   META_PIXEL_SCRIPT,
   attachTelegramLeadTracking,
+  trackMetaPageView,
 } from "../lib/meta-pixel";
 
 function NotFoundComponent() {
@@ -176,8 +177,11 @@ function RootComponent() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Meta Pixel: Telegram link tıklamalarında Lead dönüşümü gönder.
-  useEffect(() => attachTelegramLeadTracking(), []);
+  // Meta Pixel: PageView (piksel + CAPI) ve Telegram Lead dönüşümleri.
+  useEffect(() => {
+    trackMetaPageView();
+    return attachTelegramLeadTracking();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -1,6 +1,10 @@
-export const META_PIXEL_ID = "2512804619179299";
+import { sendMetaEvent } from "@/lib/api/meta.functions";
 
-/** Meta Pixel base code — inject into <head> on every page. */
+export const META_PIXEL_ID = "2512804619179299";
+export const META_LEAD_VALUE = 10.0;
+export const META_LEAD_CURRENCY = "TRY";
+
+/** Meta Pixel base code — yalnızca init; PageView istemci + CAPI ile gönderilir. */
 export const META_PIXEL_SCRIPT = `
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -11,7 +15,6 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '${META_PIXEL_ID}');
-fbq('track', 'PageView');
 `.trim();
 
 declare global {
@@ -21,11 +24,97 @@ declare global {
   }
 }
 
-/** Fires Meta Lead conversion when user clicks a Telegram link. */
-export function trackMetaLead() {
-  if (typeof window !== "undefined" && typeof window.fbq === "function") {
-    window.fbq("track", "Lead");
+type MetaEventName = "PageView" | "Lead";
+
+function createEventId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
   }
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+}
+
+function readCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function getFbp(): string | undefined {
+  return readCookie("_fbp");
+}
+
+function getFbc(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  const fromCookie = readCookie("_fbc");
+  if (fromCookie) return fromCookie;
+
+  const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+  if (!fbclid) return undefined;
+  return `fb.1.${Date.now()}.${fbclid}`;
+}
+
+function getExternalId(): string {
+  if (typeof window === "undefined") return createEventId();
+  const key = "tm_visitor_id";
+  let id = localStorage.getItem(key);
+  if (!id) {
+    id = createEventId();
+    localStorage.setItem(key, id);
+  }
+  return id;
+}
+
+function fireBrowserPixel(eventName: MetaEventName, eventId: string) {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+
+  if (eventName === "Lead") {
+    window.fbq(
+      "track",
+      "Lead",
+      { value: META_LEAD_VALUE, currency: META_LEAD_CURRENCY },
+      { eventID: eventId },
+    );
+    return;
+  }
+
+  window.fbq("track", "PageView", {}, { eventID: eventId });
+}
+
+function sendServerEvent(eventName: MetaEventName, eventId: string) {
+  if (typeof window === "undefined") return;
+
+  void sendMetaEvent({
+    data: {
+      eventName,
+      eventId,
+      eventSourceUrl: window.location.href,
+      fbp: getFbp(),
+      fbc: getFbc(),
+      externalId: getExternalId(),
+    },
+  }).catch(() => {
+    // Sessiz — tarayıcı pikseli yedek kanal olarak kalır.
+  });
+}
+
+function dispatchMetaEvent(eventName: MetaEventName) {
+  const eventId = createEventId();
+  fireBrowserPixel(eventName, eventId);
+  sendServerEvent(eventName, eventId);
+}
+
+/** İlk sayfa yüklemesinde bir kez PageView (piksel + CAPI, aynı event_id). */
+export function trackMetaPageView() {
+  if (typeof window === "undefined") return;
+  const key = "tm_meta_pageview";
+  if (sessionStorage.getItem(key)) return;
+  sessionStorage.setItem(key, "1");
+  dispatchMetaEvent("PageView");
+}
+
+/** Telegram link tıklamasında Lead (value + currency + CAPI user_data). */
+export function trackMetaLead() {
+  dispatchMetaEvent("Lead");
 }
 
 /** Attach once at root — catches every Telegram anchor click site-wide. */

@@ -19,8 +19,14 @@ import process from "node:process";
 export function getServerConfig() {
   return {
     nodeEnv: process.env.NODE_ENV,
-    // Add server-only values here, e.g.:
-    //   databaseUrl: process.env.DATABASE_URL,
-    //   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+  };
+}
+
+/** Meta Conversions API — sunucu tarafı gizli anahtarlar (Vercel env). */
+export function getMetaCapiConfig() {
+  return {
+    pixelId: process.env.META_PIXEL_ID ?? "2512804619179299",
+    accessToken: process.env.META_CAPI_ACCESS_TOKEN ?? "",
+    testEventCode: process.env.META_TEST_EVENT_CODE ?? "",
   };
 }
