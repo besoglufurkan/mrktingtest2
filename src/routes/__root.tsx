@@ -86,6 +86,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Trader Melek ile her sabah BIST 100 teknik analiz paylaşımları, grafik yorumları ve eğitim içerikleri Telegram'da. Ücretsiz analiz topluluğuna katıl." },
       { name: "author", content: "Trader Melek" },
       { name: "theme-color", content: "#1f9d6e" },
+      { name: "facebook-domain-verification", content: "qwz8qxgwtzpv3s2e525pqwage4gugw" },
       { property: "og:site_name", content: "Trader Melek" },
       { property: "og:title", content: "Trader Melek — BIST 100 Teknik Analiz & Finansal Okuryazarlık" },
       { property: "og:description", content: "Her sabah BIST 100 teknik analiz paylaşımları ve eğitim içerikleri Telegram'da. Ücretsiz analiz topluluğuna katıl." },
