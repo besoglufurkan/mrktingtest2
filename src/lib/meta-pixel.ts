@@ -1,6 +1,6 @@
 import { sendMetaEvent } from "@/lib/api/meta.functions";
 
-export const META_PIXEL_ID = "2512804619179299";
+export const META_PIXEL_ID = "2223965438403463";
 export const META_LEAD_VALUE = 10.0;
 export const META_LEAD_CURRENCY = "TRY";
 

@@ -25,7 +25,7 @@ export function getServerConfig() {
 /** Meta Conversions API — sunucu tarafı gizli anahtarlar (Vercel env). */
 export function getMetaCapiConfig() {
   return {
-    pixelId: process.env.META_PIXEL_ID ?? "2512804619179299",
+    pixelId: process.env.META_PIXEL_ID ?? "2223965438403463",
     accessToken: process.env.META_CAPI_ACCESS_TOKEN ?? "",
     testEventCode: process.env.META_TEST_EVENT_CODE ?? "",
   };
