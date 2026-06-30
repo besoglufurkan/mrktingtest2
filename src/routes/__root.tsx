@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Trader Melek — BIST 100 Teknik Analiz & Finansal Okuryazarlık" },
       { name: "description", content: "Trader Melek ile her sabah BIST 100 teknik analiz paylaşımları, grafik yorumları ve eğitim içerikleri Telegram analiz topluluğunda." },
       { name: "author", content: "Trader Melek" },

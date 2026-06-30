@@ -178,3 +178,12 @@
 @utility animate-float {
   animation: float-slow 6s ease-in-out infinite;
 }
+
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 8px 32px rgba(16, 185, 129, 0.35), 0 0 0 0 rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 12px 40px rgba(16, 185, 129, 0.5), 0 0 0 6px rgba(16, 185, 129, 0.08); }
+}
+
+@utility animate-cta-glow {
+  animation: cta-glow 2.5s ease-in-out infinite;
+}
